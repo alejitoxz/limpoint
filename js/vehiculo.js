@@ -86,28 +86,13 @@ function listar_alianza(){
     })
 }
 function registrar_vehiculo(){
-    var txt_interno = $("#txt_interno").val();
     var txt_placa = $("#txt_placa").val();
-    var txt_marca = $("#txt_marca").val();
-    var txt_modelo = $("#txt_modelo").val();
-
-    var txt_chasis = $("#txt_chasis").val();
-    var txt_pasajeros = $("#txt_pasajeros").val();
-    var sel_empresa = $("#sel_empresa").val();
+    var sel_tipoVehiculo = $("#sel_tipoVehiculo").val();
+    var sel_alianza = $("#sel_alianza").val();
     var sel_pro_vehiculo = $("#sel_pro_vehiculo").val();
 
-    var txt_soat = $("#txt_soat").val();
-    var txt_tecnomecanica = $("#txt_tecnomecanica").val();
-    var txt_poliza_cont = $("#txt_poliza_cont").val();
-    var txt_poliza_ext = $("#txt_poliza_ext").val();
 
-    var venc_soat = $("#venc_soat").val();
-    var venc_tecno = $("#venc_tecno").val();
-    var venc_poliza_cont = $("#venc_poliza_cont").val();
-    var venc_poliza_ext = $("#venc_poliza_ext").val();
-
-
-    if( txt_interno == '' ||
+    if(
         txt_placa == ''
     ){
         return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
@@ -117,22 +102,10 @@ function registrar_vehiculo(){
         "url": "../controlador/vehiculo/controlador_vehiculo_registrar.php",
         "type": "POST",
         data:{
-            txt_interno:txt_interno,
             txt_placa:txt_placa,
-            txt_marca:txt_marca,
-            txt_modelo:txt_modelo,
-            txt_chasis:txt_chasis,
-            txt_pasajeros:txt_pasajeros,
-            sel_empresa:sel_empresa,
-            sel_pro_vehiculo:sel_pro_vehiculo,
-            txt_soat:txt_soat,
-            txt_tecnomecanica:txt_tecnomecanica,
-            txt_poliza_cont:txt_poliza_cont,
-            txt_poliza_ext:txt_poliza_ext,
-            venc_soat:venc_soat,
-            venc_tecno:venc_tecno,
-            venc_poliza_cont:venc_poliza_cont,
-            venc_poliza_ext:venc_poliza_ext
+            sel_alianza:sel_alianza,
+            sel_tipoVehiculo:sel_tipoVehiculo,
+            sel_pro_vehiculo:sel_pro_vehiculo
             
         }
     }).done(function(resp){

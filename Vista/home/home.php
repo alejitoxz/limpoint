@@ -1,7 +1,7 @@
 <?php
 session_start();
 $Rol = $_SESSION['ROL'];
-if ($Rol == 1 || $Rol == 4) {
+if ($Rol == 1 || $Rol == 2) {
 
 ?>
 <div class="col-md-12">
@@ -22,12 +22,12 @@ if ($Rol == 1 || $Rol == 4) {
                     <div class="inner">
                     <h3 id="contadorServicio">0</h3>
 
-                    <p>Orden de servicio</p>
+                    <p>Servicios</p>
                     </div>
                     <div class="icon">
                     <i class="fas fa-list"></i>
                     </div>
-                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer">Ordenes registradas del dia
+                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer">Servicios registrados en el dia
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -54,12 +54,12 @@ if ($Rol == 1 || $Rol == 4) {
                     <div class="small-box bg-success">
                     <div class="inner">
                     <h3 id="contadorPropietario">0</h3>
-                        <p>Propietarios</p>
+                        <p>Clientes</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                        <a onclick="cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php')" class="small-box-footer">Total de propietarios registrados 
+                        <a onclick="cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php')" class="small-box-footer">Total de clientes registrados 
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>

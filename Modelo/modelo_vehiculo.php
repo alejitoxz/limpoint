@@ -16,21 +16,21 @@ session_start();
             $idUsuario = $_SESSION['S_ID'];
             
             $sql  = "SELECT
+            pro.id as idPropietario,
             v.id,
             v.placa,
             v.tipoVehiculo,
-            v.alianza,
-            (p.nombre + ' ' + p.apellido) AS nombre, 
+            md.descripcion as alianza,
             co.entResp as empresa,
-            pro.id as idPropietario
+            (p.nombre + ' ' + p.apellido) AS nombre
             FROM
             vehiculo AS v
-            left JOIN company AS co ON (v.idCompany = co.id)
+            left JOIN company AS co ON (co.id = v.idCompany  )
             left JOIN propietario AS pro ON (v.idPropietario = pro.id)
             left JOIN persona AS p ON (pro.idPersona = p.id)
-            /*LEFT JOIN miscelaneos_detalle AS md ON (md.id = v.idEmpresa)*/
-            WHERE v.estatus = 1 and co.Id = $idCompany;
-            ";//echo $sql;
+            LEFT JOIN miscelaneos_detalle AS md ON (md.id = v.alianza)
+            WHERE v.estatus = 1 and v.idCompany = $idCompany;
+            ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -92,6 +92,15 @@ session_start();
         $Rol = $_SESSION['ROL'];
         $idUsuario = $_SESSION['S_ID'];
 
+        if ($Rol == 1) {
+            $com = "and pro.idCompany = $idCompany";
+        }else if ($Rol == 2) {
+            $com = "";
+            
+        }else{ 
+            
+            $com = "and pro.idCompany = $idCompany";
+        }
 
         $sql  = "SELECT 
         pro.id,
@@ -99,7 +108,8 @@ session_start();
         from 
         propietario as pro
         INNER JOIN persona AS p ON (pro.idPersona = p.id)
-        where  pro.estatus = 1 
+        INNER JOIN company AS c ON (c.id = pro.idCompany)
+        where  pro.estatus = 1 $com
         ";
         //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
@@ -122,44 +132,9 @@ session_start();
         $this->conexion->conectar();
     }
 
-    function odometro($id){
-        $conn = $this->conexion->conectar();
-        $idCompany = $_SESSION['COMPANY'];
-        $Rol = $_SESSION['ROL'];
-        $idUsuario = $_SESSION['S_ID'];
-
-
-        $sql  = "SELECT
-        vwo.Odometer/1000 as Odometer
-        FROM
-        vehiculo AS v
-        left JOIN company AS co ON (v.idCompany = co.id)
-        left JOIN [Visualsat.Avl.Database_col].dbo.vw_Vehicles AS vw ON (vw.Plate = v.placa)
-        left JOIN [Visualsat.Avl.Database_col].dbo.vw_VehiclesOdometer AS vwo ON (vw.Id = vwo.VehicleId)
-        WHERE v.estatus = 1 and co.Id = $idCompany and v.id = $id;
-        ";
-        //echo $sql;
-        $resp = sqlsrv_query($conn, $sql);
-        if( $resp === false) {
-            return 0;
-        }
-        $i = 0;
-        $data = [];
-        while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
-        {
-            $data[$i] = $row;
-            $i++;
-        }
-        if($data>0){
-            return $data;
-        }else{
-            return 0;
-        }
-        
-        $this->conexion->conectar();
-    }
     
-    function registrar_vehiculo($txt_interno,$txt_placa,$txt_marca,$txt_modelo,$txt_chasis,$txt_pasajeros,$sel_empresa,$sel_pro_vehiculo,$txt_soat,$txt_tecnomecanica,$txt_poliza_cont,$txt_poliza_ext,$venc_soat,$venc_tecno,$venc_poliza_cont,$venc_poliza_ext){
+    
+    function registrar_vehiculo($txt_placa,$sel_tipoVehiculo,$sel_alianza,$sel_pro_vehiculo){
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
         $idUsuario = $_SESSION['S_ID'];
@@ -171,49 +146,24 @@ session_start();
         }
 
         $sql  = "INSERT INTO vehiculo(
-                            cod_interno,
                             placa,
-                            marca,
-                            modelo,
-                            chasis,
-                            num_pasajero,
-                            soat,
-                            vSoat,
-                            tecnomecanica,
-                            vTecnomecanica,
-                            pContractual,
-                            vContractual,
-                            pExtraContractual,
-                            vExtraContractual,
-                            idEmpresa,
+                            tipovehiculo,
+                            alianza,
+                            estatus,
                             idPropietario,
-                            idUsuario,
                             idCompany,
-                            estatus
+                            idUsuario
                             )
                  VALUES(
-                        '$txt_interno',
                         '$txt_placa',
-                        '$txt_marca',
-                        '$txt_modelo',
-                        '$txt_chasis',
-                        '$txt_pasajeros',
-                        '$txt_soat',
-                        '$venc_soat',
-                        '$txt_tecnomecanica',
-                        '$venc_tecno',
-                        '$txt_poliza_cont',
-                        '$venc_poliza_cont',
-                        '$txt_poliza_ext',
-                        '$venc_poliza_ext',
-                        $sel_empresa,
-                        $propietario,
-                        $idUsuario,
+                        $sel_tipoVehiculo,
+                        $sel_alianza,
+                        1,
+                        $sel_pro_vehiculo,
                         $idCompany,
-                        1
+                        $idUsuario
                         )
                  ";
-                 //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
         
         if( $resp === false) {

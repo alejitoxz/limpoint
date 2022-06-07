@@ -22,6 +22,19 @@ session_start();
             $idCompany = $_SESSION['COMPANY'];
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
+            if ($Rol == 3) {
+                $wr = "and s.idUsuario = $idUsuario";
+                $com = "and s.id = $idCompany";
+            }else if ($Rol == 1 ) {
+                $com = "";
+                $wr = "";
+            }else if ( $Rol == 2) {
+                $com = "";
+                $wr = "";
+            }else{ 
+                $wr = "";
+                $com = "and s.id = $idCompany";
+            }
 
             $sql = "SELECT 
             p.id as idPersona,
@@ -39,8 +52,9 @@ session_start();
             INNER JOIN propietario AS pro ON ( pro.id = v.idPropietario )
             INNER JOIN persona AS p ON ( p.id = pro.idPersona )
             INNER JOIN usuario AS u ON ( u.id = s.idUsuario )
-            INNER JOIN persona AS pe ON ( pe.id = u.idPersona )" ;
-              
+            INNER JOIN persona AS pe ON ( pe.id = u.idPersona )
+            INNER JOIN company AS co ON ( co.id = s.idCompany )
+            WHERE s.estatus = 1 $com $wr " ;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -161,6 +175,15 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
+            if ($Rol == 2) {
+                $com = "and v.idCompany = $idCompany";
+            }else if ($Rol == 1) {
+                $com = "";
+                
+            }else{ 
+                
+                $com = "and v.idCompany = $idCompany";
+            }
 
 
             $sql  = "SELECT
@@ -170,7 +193,7 @@ session_start();
             vehiculo AS v
             INNER JOIN company AS c ON ( c.id = v.idCompany ) 
             WHERE
-            v.estatus = 1";
+            v.estatus = 1 $com";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -677,7 +700,7 @@ session_start();
                      ROLLBACK TRAN
                      END CATCH";
             $resp = sqlsrv_query($conn, $sql);
-            echo $sql; exit;
+            
             if( $resp === false) {
                 return 0;
             }else{

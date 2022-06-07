@@ -1,5 +1,5 @@
 <?php
-define("SERVIDOR","74.208.93.220");
+define("SERVIDOR","74.208.36.204");
 define("BD","VSAT_limpoint");
 define("USUARIO","sistemasvsat");
 define("CLAVE","mfcvelazvsat");

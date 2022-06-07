@@ -27,8 +27,8 @@
                           <th>Placa</th>
                           <th>Tipo</th>
                           <th>Alianza</th>
-                          <th>Empresa</th>
-                          <th>Propietario</th>
+                          <th>Punto de servicio</th>
+                          <th>Cliente</th>
                           <th align="right" >Acciones</th>
                         </tr>
                     </thead>

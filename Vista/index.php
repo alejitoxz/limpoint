@@ -218,7 +218,6 @@ if(isset($Datos[$i]['submodulos'])){
         <div class="row mb-2">
           <div class="col-sm-8">
           <img src="../Vista/imagenes/logo_administracion.jpg" class="logosHome">
-            <h1 class="m-0 text-dark">Bienvenidos a LIMPOINT  </h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -326,6 +325,8 @@ if(isset($Datos[$i]['submodulos'])){
 <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- BS-Stepper -->
 <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <script>
 
 $(document).ready(function(){

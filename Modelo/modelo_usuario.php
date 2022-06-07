@@ -10,6 +10,7 @@ session_start();
 
         function VerificarUsuario($usuario,$contra){
             $conn = $this->conexion->conectar();
+            
             $sql1  = "SELECT
                     u.*,
                     c.EntResp,
@@ -28,7 +29,7 @@ session_start();
                     WHERE u.usuario = '$usuario' AND u.status = 1 
                     and m.nivel = 2 
                     ORDER BY m.orden";
-                    
+                   
             $resp1 = sqlsrv_query($conn, $sql1);
           
             if( $resp1 === false) {
@@ -110,7 +111,6 @@ session_start();
             $idUsuario = $_SESSION['S_ID'];
 
             if ($Rol == 2) {
-                $wr = "and u.id = $idUsuario";
                 $com = "and u.idCompany = $idCompany";
             }else if ($Rol == 1) {
                 $com = "";
@@ -136,7 +136,7 @@ session_start();
                     INNER JOIN company AS co ON (u.idCompany = co.id)
                     INNER JOIN rol AS r ON (u.idRol = r.id)
                     INNER JOIN persona AS p ON (u.idPersona = p.id)
-                    WHERE u.status = 1 
+                    WHERE u.status = 1 $com 
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -349,8 +349,7 @@ session_start();
                     UPDATE usuario SET
                     usuario= '$usuario' 
                     $claveValidacion,
-                    idRol= $tipoRol,
-                    idCompany = $idCompany
+                    idRol= $tipoRol
                     WHERE id=$id
 
                     COMMIT TRAN

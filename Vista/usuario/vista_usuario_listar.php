@@ -32,7 +32,7 @@
                           <th>E-mail</th>
                           <th>Usuario</th>
                           <th>Rol</th>
-                          <th>Compañía</th>
+                          <th>Punto de servicio</th>
                           <th>Editar</th>
                         </tr>
                     </thead>

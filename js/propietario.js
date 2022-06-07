@@ -34,7 +34,25 @@ function listar_propietario(){
     } );
     
 }
-
+function listar_alianzap(){
+    $.ajax({
+        "url": "../controlador/propietario/controlador_alianzap_listar.php",
+        "type": "POST"
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        
+        var cadena="";
+        if(data.length>0){
+            cadena+="<option value='0'>Seleccionar</option>"; 
+            for(var i=0; i < data.length; i++){
+                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['alianza']+"</option>";
+            }
+            $("#sel_alianzap").html(cadena);
+        }else{
+            cadena+="<option value =''>No se encontraron registros</option>"; 
+        }
+    })
+}
 function AbrirModalRegistroPropietario(){
     $("#modal_registro_P").modal({backdrop:'static',keyboard:false})
     $("#modal_registro_P").modal('show');
@@ -74,17 +92,21 @@ function registrar_propietario(){
     var apellido = $("#txt_apep").val();
     var telefono = $("#txt_telp").val();
     var email = $("#txt_emap").val();
+    var placa = $("#txt_placa").val();
+    var tipoVehiculo = $("#sel_tipoVehiculo").val();
+    var alianza = $("#sel_alianzap").val();
+    
 
     if( nombre == '' ||
         apellido == '' ||
         telefono == '' ||
-        email == '' 
+        placa == ''
 
         ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
     
-
+        
     $.ajax({
         "url": "../controlador/propietario/controlador_propietario_registro.php",
         "type": "POST",
@@ -94,7 +116,11 @@ function registrar_propietario(){
         apellido:apellido,
         telefono:telefono,
         email:email,
+        placa:placa,
+        tipoVehiculo:tipoVehiculo,
+        alianza:alianza
         }
+        
     }).done(function(resp){
         console.log(resp);
         if(resp > 0){

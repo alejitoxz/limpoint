@@ -23,6 +23,12 @@ function listar_orden(){
             {
                 "targets": [ 0 ],
                 "visible": false
+            },{
+                "targets": [ 4 ],
+                "visible": false
+            },{
+                "targets": [ 5 ],
+                "visible": false
             }
         ],
         "columns": [
@@ -106,6 +112,7 @@ function AbrirModalEditarOrdenServicio(){
       });
 }
 
+
 function listar_placa(){
     $.ajax({
         "url": "../controlador/ordenServicio/controlador_placa_listar.php",
@@ -120,6 +127,7 @@ function listar_placa(){
                 cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['placa']+"</option>";
             } 
             $("#sel_placa").html(cadena);
+            $("#sel_placa_ver").html(cadena);
         }else{
             cadena+="<option value =''>No se encontraron registros</option>"; 
         }
@@ -169,6 +177,12 @@ function listar_servicio(){
             $("#sel_servicio4").html(cadena);
             $("#sel_servicio5").html(cadena);
             $("#sel_servicio6").html(cadena);
+            $("#sel_servicio1_ver").html(cadena);
+            $("#sel_servicio2_ver").html(cadena);
+            $("#sel_servicio3_ver").html(cadena);
+            $("#sel_servicio4_ver").html(cadena);
+            $("#sel_servicio5_ver").html(cadena);
+            $("#sel_servicio6_ver").html(cadena);
 
         }else{
             cadena+="<option value =''>No se encontraron registros</option>"; 
@@ -425,6 +439,15 @@ function registrar_Servicio(){
     var servicio5 = $("#sel_servicio5").val();
     var servicio6 = $("#sel_servicio6").val();
     var observaciones4 = $("#txt_observaciones4").val();
+
+    var inv_reloj = $("#inv_reloj").bootstrapSwitch('state');
+    var inv_radio = $("#inv_radio").bootstrapSwitch('state');
+
+
+
+    console.log("reloj",$("#inv_reloj").bootstrapSwitch('state'));
+    console.log("radio",$("#inv_radio").bootstrapSwitch('state'));
+    return;
     
 
     $.ajax({
@@ -491,7 +514,7 @@ function registrar_Servicio(){
         
         if(resp > 0){
             if(resp==1){
-            $("#modal_registro_OrdenServicio").modal('hide');
+            $("#modal_registro_Servicio").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Registro realizado', "success").then((value)=>{
                 table.ajax.reload();
                 limpiarRegistro();
@@ -1205,175 +1228,63 @@ function fechaCochenta(dias,id){
     $("#"+id).val(fec);
 }
 function limpiarRegistro(){
-    var fecha = new Date();
-    fecha.setDate(fecha.getDate());
-    mes = '' + (fecha.getMonth() + 1),
-    dia = '' + fecha.getDate(),
-    anio = fecha.getFullYear();
 
-    if (mes.length < 2) 
-        mes = '0' + mes;
-    if (dia.length < 2) 
-        dia = '0' + dia;
 
-    var fec = [anio, mes, dia].join('-');
-
-    $("#sel_placa_vehiculo").val(0);
-    $("#txt_revb").val(0);
-    $("#sel_rReg").val(0);
-    $("#txt_kmGps").val("");
-    $("#txt_vExtintor").val(fec);
-    $("#txt_oReg").val("");
-    $("#txt_obs").val("");
+    $("#sel_placa").val(0);
     $("#sel_tecnico").val(0);
-    $("#sel_bateria").val(0);
-    $("#sel_tipoBateria").val(0);
-    $("#sel_marca").val(0);
-    $("#txt_serial").val("");
-    $("#txt_fVenta").val(fec);
-    $("#txt_fInstalacion").val(fec);
-    $("#txt_tUso").val("");
-    $("#txt_pCambio").val();
-    $("#txt_pMantenimiento").val();
-    $("#txt_oMejora").val("");
-    $("#txt_llantaSerial1").val("");
-    $("#sel_profundidad1").val(0);
-    $("#sel_marca_llanta1").val(0);
-    $("#sel_tipoMarca1").val(0);
-    $("#sel_estado1").val(0);
-    $("#txt_fInstalacion1").val(fec);
-    $("#txt_fReencauche1").val(fec);
-    $("#txt_fCambio1").val();
-    $("#txt_fRotacion1").val(fec);
+    $("#txt_observaciones1").val(0);
+    $("#sel_reloj").val(0);
+    $("#sel_radio").val(0);
+    $("#sel_cd").val(0);
+    $("#sel_gato").val(0);
+    $("#sel_encendedor").val(0);
+    $("#sel_cenicero").val(0);
+    $("#sel_forro").val(0);
+    $("#sel_herramienta").val(0);
+    $("#sel_rueda").val(0);
+    $("#sel_tapete").val(0);
+    $("#sel_cuchilla").val(0);
+    $("#sel_llavero").val(0);
+    $("#sel_tercerStop").val(0);
+    $("#sel_emblema").val(0);
+    $("#sel_parasol").val(0);
+    $("#sel_manija").val(0);
+    $("#sel_cinturon").val(0);
+    $("#sel_copa").val(0);
+    $("#sel_espejo").val(0);
+    $("#sel_antena").val(0);
+    $("#sel_exploradora").val(0);
+    $("#observaciones2").val("");
+    $("#sel_1").val(0);
+    $("#sel_2").val(0);
+    $("#sel_3").val(0);
+    $("#sel_4").val(0);
+    $("#sel_5").val(0);
+    $("#sel_6").val(0);
 
-    $("#txt_llantaSerial2").val("");
-    $("#sel_profundidad2").val(0);
-    $("#sel_marca_llanta2").val(0);
-    $("#sel_tipoMarca2").val(0);
-    $("#sel_estado2").val(0);
-    $("#txt_fInstalacion2").val(fec);
-    $("#txt_fReencauche2").val("");
-    $("#txt_fCambio2").val("");
-    $("#txt_fRotacion2").val("");
+    $("#sel_7").val(0);
+    $("#sel_8").val(0);
+    $("#sel_9").val(0);
+    $("#sel_10").val(0);
+    $("#sel_11").val(0);
+    $("#sel_12").val(0);
+    $("#sel_13").val(0);
+    $("#sel_14").val(0);
+    $("#sel_15").val(0);
 
-    $("#txt_llantaSerial3").val("");
-    $("#sel_profundidad3").val(0);
-    $("#sel_marca_llanta3").val(0);
-    $("#sel_tipoMarca3").val(0);
-    $("#sel_estado3").val(0);
-    $("#txt_fInstalacion3").val(fec);
-    $("#txt_fReencauche3").val(fec);
-    $("#txt_fCambio3").val();
-    $("#txt_fRotacion3").val(fec);
+    $("#sel_16").val(0);
+    $("#sel_17").val(0);
+    $("#sel_18").val(0);
+    $("#sel_19").val(0);
+    $("#txt_observaciones3").val(0);
+    $("#sel_servicio1").val(0);
+    $("#sel_servicio2").val(0);
+    $("#sel_servicio3").val(0);
+    $("#sel_servicio4").val(0);
 
-    $("#txt_llantaSerial4").val("");
-    $("#sel_profundidad4").val(0);
-    $("#sel_marca_llanta4").val(0);
-    $("#sel_tipoMarca4").val(0);
-    $("#sel_estado4").val(0);
-    $("#txt_fInstalacion4").val(fec);
-    $("#txt_fReencauche4").val(fec);
-    $("#txt_fCambio4").val();
-    $("#txt_fRotacion4").val(fec);
-
-    $("#txt_llantaSerial5").val("");
-    $("#sel_profundidad5").val(0);
-    $("#sel_marca_llanta5").val(0);
-    $("#sel_tipoMarca5").val(0);
-    $("#sel_estado5").val(0);
-    $("#txt_fInstalacion5").val(fec);
-    $("#txt_fReencauche5").val(fec);
-    $("#txt_fCambio5").val();
-    $("#txt_fRotacion5").val(fec);
-
-    $("#txt_llantaSerial6").val("");
-    $("#sel_profundidad6").val(0);
-    $("#sel_marca_llanta").val(0);
-    $("#sel_tipoMarca6").val(0);
-    $("#sel_estado6").val(0);
-    $("#txt_fInstalacion6").val(fec);
-    $("#txt_fReencauche6").val(fec);
-    $("#txt_fCambio6").val();
-    $("#txt_fRotacion6").val(fec);
-
-
-    $("#txt_cal1").val("");
-    $("#txt_cal2").val("");
-    $("#txt_cal3").val("");
-    $("#txt_cal4").val("");
-    $("#txt_cal5").val("");
-    $("#txt_cal6").val("");
-    $("#txt_oCalibracion").val("");
-    $("#sel_bal1").val(0);
-    $("#sel_bal2").val(0);
-    $("#sel_bal3").val(0);
-    $("#sel_bal4").val(0);
-    $("#sel_bal5").val(0);
-    $("#sel_bal6").val(0);
-    $("#txt_oBalanceo").val("");
-    $("#sel_alineacion1").val(0);
-    $("#sel_alineacion2").val(0);
-    $("#txt_obs3").val("");
-    $("#txt_obsM3").val("");
-
-    $("#txt_fechaA").val(fec);
-    $("#txt_pCambioA").val();
-    $("#txt_kilometraje").val("");
-    $("#txt_ckilometraje").val("");
-    $("#sel_tipo_aceite").val(0);
-    $("#sel_marca_aceite").val(0);
-    $("#txt_cantidad1").val(0);
-    $("#sel_presentacion1").val(0);
-    $("#sel_nivelacion1").val(0);
-    $("#txt_cNivelacion1").val(0);
-    $("#sel_filtro_aceite").val(0);
-    $("#sel_filtro_combustible").val(0);
-    $("#sel_filtro_combustible2").val(0);
-    $("#sel_filtro_combustible3").val(0);
-    $("#sel_filtro_aire").val(0);
-    $("#sel_tipo_aceite1").val(0);
-    $("#sel_marca_aceite1").val(0);
-    $("#txt_uCambio1").val(fec);
-    $("#txt_pCambio1").val();
-    $("#txt_cantidad2").val(0);
-    $("#sel_presentacion2").val(0);
-    $("#sel_nivelacion2").val(0);
-    $("#txt_nivelacion2").val(0);
-
-    $("#sel_tipo_aceite2").val(0);
-    $("#sel_marca_aceite2").val(0);
-    $("#txt_uCambio2").val(fec);
-    $("#txt_pCambio2").val();
-    $("#txt_cantidad3").val(0);
-    $("#sel_presentacion3").val(0);
-    $("#sel_nivelacion3").val(0);
-    $("#txt_nivelacion3").val(0);
-
-    $("#sel_tipo_aceite3").val(0);
-    $("#sel_marca_aceite3").val(0);
-    $("#txt_uCambio3").val(fec);
-    $("#txt_pCambio3").val();
-
-    $("#sel_tipo_aceite4").val(0);
-    $("#sel_marca_aceite4").val(0);
-    $("#txt_uCambio4").val(fec);
-    $("#txt_pCambio4").val();
-
-    $("#sel_lFreno").val(0);
-    $("#sel_lParabrisa").val(0);
-    $("#sel_refrigerante").val(0);
-    $("#sel_hidraulico").val(0);
-    $("#sel_lMotor").val(0);
-    $("#sel_lCaja").val(0);
-    $("#sel_lTransmision").val(0);
-
-    $("#sel_lFrenos1").val(0);
-    $("#sel_engrase").val(0);
-    $("#sel_sRadiador").val(0);
-    $("#sel_sFiltroAire").val(0);
-
-    
-    $("#txt_observacionesF").val("");
+    $("#sel_servicio5").val(0);
+    $("#sel_servicio6").val(0);
+    $("#txt_observaciones4").val("");
 }
 
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
@@ -1425,12 +1336,12 @@ function modificar_estatus(id,estatus){
     })
 }
 
-function AbrirModalVerOrdenServicio(){
-    $("#modal_ver_OrdenServicio").modal({backdrop:'static',keyboard:false})
-    $("#modal_ver_OrdenServicio").modal('show');
+function AbrirModalVerServicio(){
+    $("#modal_ver_Servicio").modal({backdrop:'static',keyboard:false})
+    $("#modal_ver_Servicio").modal('show');
     $(document).ready(function(){
         $('.js-example-basic-single').select2();
-        $("#modal_ver_OrdenServicio").on('shown.bs.modal',function(){
+        $("#modal_ver_Servicio").on('shown.bs.modal',function(){
         });
     
         // inicimos wizzard
@@ -1450,329 +1361,120 @@ $('#tabla_orden').on('click','.ver',function(){
         var datosOrden = table.row($(this).parents('tr')).data();
     }
     
-    var id =datosOrden.id;
-    var placa =datosOrden.idVehiculo;
-    var revBimCotrautol =datosOrden.revBimCotrautol;
-    var rRegistradora =datosOrden.rRegistradora;
-    var vExtintor =datosOrden.vExtintor;
-    var oReg =datosOrden.oRegistradora;
-    var observacion =datosOrden.observacion;     
-    var tecnico =datosOrden.idTecnico;
-    var bateria =datosOrden.bateria;
-    var tipoBateria =datosOrden.tipoBateria;
-    var marca =datosOrden.marca;
-    var serial =datosOrden.serial;
-    var fVenta =datosOrden.fVenta;
-    var fInstalacion =datosOrden.fInstalacion;
-    var tUso =datosOrden.tiempoUso;
-    var pCambio =datosOrden.proximoCambio;
-    var pMantenimiento =datosOrden.proximoMantenimiento;
-    var oMejora =datosOrden.oportunidadesMejora;
-    var llantaSerial1 =datosOrden.llanta1Serial;
-    var profundidad1 =datosOrden.llanta1Profundidad;
-    var opmarca1 =datosOrden.llanta1Marca;
-    var tipoMarca1 =datosOrden.llanta1Tipo;
-    var estado1 =datosOrden.llanta1Estado;
-    var fInstalacion1 =datosOrden.llanta1Instalacion;
-    var fReencauche1 =datosOrden.llanta1Reencauche;
-    var fCambio1 =datosOrden.llanta1Cambio;
-    var fRotacion1 =datosOrden.llanta1Rotacion;
+    var placa = datosOrden.placa;
+    var fIngreso = datosOrden.fIngreso;
+    var tecnico = datosOrden.tecnico;
+    var observaciones1 = datosOrden.observaciones1;
+    var reloj = datosOrden.reloj;
+    var radio = datosOrden.radio;
+    var cd = datosOrden.cd;
+    var gato = datosOrden.gato;
+    var encendedor = datosOrden.encendedor;
+    var cenicero = datosOrden.cenicero;
+    var forro = datosOrden.forro;
+    var herramienta = datosOrden.herramienta;
+    var rueda = datosOrden.rueda;
+    var tapete = datosOrden.tapete;
+    var cuchilla = datosOrden.cuchilla;
+    var llavero = datosOrden.llavero;
+    var tercerStop = datosOrden.tercerStop;
+    var emblema = datosOrden.emblema;
+    var parasol = datosOrden.parasol;
+    var manija = datosOrden.manija;
+    var cinturon = datosOrden.cinturon;
+    var copa = datosOrden.copa;
+    var espejo = datosOrden.espejo;
+    var antena = datosOrden.antena;
+    var exploradora = datosOrden.exploradora;
+    var observaciones2 = datosOrden.observaciones2;
+    var numero1 = datosOrden.numero1;
+    var numero2 = datosOrden.numero2;
+    var numero3 = datosOrden.numero3;
+    var numero4 = datosOrden.numero4;
+    var numero5 = datosOrden.numero5;
+    var numero6 = datosOrden.numero6;
 
-    var llantaSerial2 =datosOrden.llanta2Serial;
-    var profundidad2 =datosOrden.llanta2Profundidad;
-    var opmarca2 =datosOrden.llanta2Marca;
-    var tipoMarca2 =datosOrden.llanta2Tipo;
-    var estado2 =datosOrden.llanta2Estado;
-    var fInstalacion2 =datosOrden.llanta2Instalacion;
-    var fReencauche2 =datosOrden.llanta2Reencauche;
-    var fCambio2 =datosOrden.llanta2Cambio;
-    var fRotacion2 =datosOrden.llanta2Rotacion;
+    var numero7 = datosOrden.numero7;
+    var numero8 = datosOrden.numero8;
+    var numero9 = datosOrden.numero9;
+    var numero10 = datosOrden.numero10;
+    var numero11 = datosOrden.numero11;
+    var numero12 = datosOrden.numero12;
+    var numero13 = datosOrden.numero13;
+    var numero14 = datosOrden.numero14;
+    var numero15 = datosOrden.numero15;
 
-    var llantaSerial3 =datosOrden.llanta3Serial;
-    var profundidad3 =datosOrden.llanta3Profundidad;
-    var opmarca3 =datosOrden.llanta3Marca;
-    var tipoMarca3 =datosOrden.llanta3Tipo;
-    var estado3 =datosOrden.llanta3Estado;
-    var fInstalacion3 =datosOrden.llanta3Instalacion;
-    var fReencauche3 =datosOrden.llanta3Reencauche;
-    var fCambio3 =datosOrden.llanta3Cambio;
-    var fRotacion3 =datosOrden.llanta3Rotacion;
+    var numero16 = datosOrden.numero16;
+    var numero17 = datosOrden.numero17;
+    var numero18 = datosOrden.numero18;
+    var numero19 = datosOrden.numero19;
+    var observaciones3 = datosOrden.observaciones3;
+    var servicio1 = datosOrden.servicio1;
+    var servicio2 = datosOrden.servicio2;
+    var servicio3 = datosOrden.servicio3;
+    var servicio4 = datosOrden.servicio4;
 
-    var llantaSerial4 =datosOrden.llanta4Serial;
-    var profundidad4 =datosOrden.llanta4Profundidad;
-    var opmarca4 =datosOrden.llanta4Marca;
-    var tipoMarca4 =datosOrden.llanta4Tipo;
-    var estado4 =datosOrden.llanta4Estado;
-    var fInstalacion4 =datosOrden.llanta4Instalacion;
-    var fReencauche4 =datosOrden.llanta4Reencauche;
-    var fCambio4 =datosOrden.llanta4Cambio;
-    var fRotacion4 =datosOrden.llanta4Rotacion;
-
-    var llantaSerial5 =datosOrden.llanta5Serial;
-    var profundidad5 =datosOrden.llanta5Profundidad;
-    var opmarca5 =datosOrden.llanta5Marca;
-    var tipoMarca5 =datosOrden.llanta5Tipo;
-    var estado5 =datosOrden.llanta5Estado;
-    var fInstalacion5 =datosOrden.llanta5Instalacion;
-    var fReencauche5 =datosOrden.llanta5Reencauche;
-    var fCambio5 =datosOrden.llanta5Cambio;
-    var fRotacion5 =datosOrden.llanta5Rotacion;
-
-    var llantaSerial6 =datosOrden.llanta6Serial;
-    var profundidad6 =datosOrden.llanta6Profundidad;
-    var opmarca6 =datosOrden.llanta6Marca;
-    var tipoMarca6 =datosOrden.llanta6Tipo;
-    var estado6 =datosOrden.llanta6Estado;
-    var fInstalacion6 =datosOrden.llanta6Instalacion;
-    var fReencauche6 =datosOrden.llanta6Reencauche;
-    var fCambio6 =datosOrden.llanta6Cambio;
-    var fRotacion6 =datosOrden.llanta6Rotacion;
-
-
-    var calibracion1 =datosOrden.calibracionLlanta1;
-    var calibracion2 =datosOrden.calibracionLlanta2;
-    var calibracion3 =datosOrden.calibracionLlanta3;
-    var calibracion4 =datosOrden.calibracionLlanta4;
-    var calibracion5 =datosOrden.calibracionLlanta5;
-    var calibracion6 =datosOrden.calibracionLlanta6;
-    var oCalibracion =datosOrden.observacionCalibracion;
-    var balanceo1 =datosOrden.Balanceo1;
-    var balanceo2 =datosOrden.Balanceo2;
-    var balanceo3 =datosOrden.Balanceo3;
-    var balanceo4 =datosOrden.Balanceo4;
-    var balanceo5 =datosOrden.Balanceo5;
-    var balanceo6 =datosOrden.Balanceo6;
-    var oBalanceo =datosOrden.oBalanceo;
-    var alineacion1 =datosOrden.alineacion1;
-    var alineacion2 =datosOrden.alineacion2;
-    var observacionG3 =datosOrden.lObservacionGeneral;
-    var observacionM3 =datosOrden.lObservacionMejora;
-
-    var fecha =datosOrden.motorFecha;
-    var pCambioA =datosOrden.motorProximoCambio;
-    var kilometraje =datosOrden.motorKilometraje;
-    var cKilometraje =datosOrden.motorCambioKilometraje;
-    var tipoAceite =datosOrden.motorTipoAceite;
-    var marca10 =datosOrden.motorMarca;
-    var cantidad1 =datosOrden.motorCantidad;
-    var presentacion1 =datosOrden.motorPresentacion;
-    var nivelacion =datosOrden.motorNivelacion;
-    var cNivelacion =datosOrden.motorCantidadNivelada;
-    var fAceite =datosOrden.motorFiltroAceite;
-    var fCombustible =datosOrden.motorfiltroCombustible;
-    var fAire =datosOrden.motorFiltroAire;
-    var tipoAceite1 =datosOrden.cajaTipoAceite;
-    var marca1 =datosOrden.cajaMarca;
-    var uCambio =datosOrden.cajaUltimoCambio;
-    var pCambio10 =datosOrden.cajaProximoCambio;
-    var cantidad2 =datosOrden.cajaCantidad;
-    var presentacion2 =datosOrden.cajaPresentacion;
-    var nivelacion2 =datosOrden.cajaNivelacion;
-    var cNivelacion2 =datosOrden.cajaCantidadNivelada;
-
-    var tipoAceite3 =datosOrden.transmicionTipoAceite;
-    var marca3 =datosOrden.transmicionMarca;
-    var uCambio3 =datosOrden.transmicionUltimoCambio;
-    var pCambio3 =datosOrden.transmicionProximoCambio;
-    var cantidad3 =datosOrden.transmicionCantidad;
-    var presentacion3 =datosOrden.transmicionPresentacion;
-    var nivelacion3 =datosOrden.transmicionNivelacion;
-    var cNivelacion3 =datosOrden.transmicionCantidadNivelada;
-
-    var tipoAceite4 =datosOrden.refrigeranteTipoAceite;
-    var marca4 =datosOrden.refrigeranteMarca;
-    var uCambio4 =datosOrden.refrigeranteUltimoCambio;
-    var pCambio4 =datosOrden.refrigeranteProximoCambio;
-
-    var tipoAceite5 =datosOrden.hidraulicoTipoAceite;
-    var marca5 =datosOrden.hidraulicoMarca;
-    var uCambio5 =datosOrden.hidraulicoUltimoCambio;
-    var pCambio5 =datosOrden.hidraulicoProximoCambio;
-
-    var lFreno =datosOrden.liquidoFrenos;
-    var lParabrisa =datosOrden.liquidoParabrisas;
-    var refrigerante =datosOrden.liquidoRefrigerantes;
-    var hidraulico =datosOrden.liquidoHidraulico;
-    var lMotor =datosOrden.liquidoMotor;
-    var lCaja =datosOrden.liquidoCaja;
-    var lTransmision =datosOrden.liquidoTransmision;
-
-    var lFrenos1 =datosOrden.otrosLimpiezaFrenos;
-    var engrase =datosOrden.otrosEngrase;
-    var sRadiador =datosOrden.otrosSopleteoRadiador;
-    var sFiltroAire =datosOrden.otrosSopleteoFiltroAire;
-    var observacionesF = datosOrden.observacionesGenerales2;
-
-    var idOrdenServicio =datosOrden.idOrdenServicio;
-    var idServicio =datosOrden.idServicio;
-
-    var fCombustible2 =datosOrden.motorfiltroCombustible2;
-    var fCombustible3 =datosOrden.motorfiltroCombustible3;
+    var servicio5 = datosOrden.servicio5;
+    var servicio6 = datosOrden.servicio6;
+    var observaciones4 = datosOrden.observaciones4;
     
 
     //levantar modal
-    AbrirModalVerOrdenServicio();
+    AbrirModalVerServicio();
     //ingresas datos modal
-    $("#idOrdenServicio").val(idOrdenServicio);
-    $("#idServicio").val(idServicio);
-    $("#sel_ver_placa_vehiculo").val(placa).trigger('change');
-    $("#txt_ver_revb").val(revBimCotrautol);
-    $("#sel_ver_rReg").val(rRegistradora).trigger('change');
-    $("#txt_ver_kmGps").val(0);
-    $("#txt_ver_vExtintor").val(vExtintor);
-    $("#txt_ver_oReg").val(oReg);
-    $("#txt_ver_obs").val(observacion);
-    $("#sel_ver_tecnico").val(tecnico).trigger('change');
-    $("#sel_ver_bateria").val(bateria).trigger('change');
-    $("#sel_ver_tipoBateria").val(tipoBateria).trigger('change');
-    $("#sel_ver_marca").val(marca).trigger('change');
-    $("#txt_ver_serial").val(serial);
-    $("#txt_ver_fVenta").val(fVenta);
-    $("#txt_ver_fInstalacion").val(fInstalacion);
-    $("#txt_ver_tUso").val(tUso);
-    $("#txt_ver_pCambio").val(pCambio);
-    $("#txt_ver_pMantenimiento").val(pMantenimiento);
-    $("#txt_ver_oMejora").val(oMejora);
-    $("#txt_ver_llantaSerial1").val(llantaSerial1);
-    $("#sel_ver_profundidad1").val(profundidad1).trigger('change');
-    $("#sel_ver_marca_llanta1").val(opmarca1).trigger('change');
-    $("#sel_ver_tipoMarca1").val(tipoMarca1).trigger('change');
-    $("#sel_ver_estado1").val(estado1).trigger('change');
-    $("#txt_ver_fInstalacion1").val(fInstalacion1);
-    $("#txt_ver_fReencauche1").val(fReencauche1);
-    $("#txt_ver_fCambio1").val(fCambio1);
-    $("#txt_ver_fRotacion1").val(fRotacion1);
-
-    $("#txt_ver_llantaSerial2").val(llantaSerial2);
-    $("#sel_ver_profundidad2").val(profundidad2).trigger('change');
-    $("#sel_ver_marca_llanta2").val(opmarca2).trigger('change');
-    $("#sel_ver_tipoMarca2").val(tipoMarca2).trigger('change');
-    $("#sel_ver_estado2").val(estado2).trigger('change');
-    $("#txt_ver_fInstalacion2").val(fInstalacion2);
-    $("#txt_ver_fReencauche2").val(fReencauche2);
-    $("#txt_ver_fCambio2").val(fCambio2);
-    $("#txt_ver_fRotacion2").val(fRotacion2);
-
-    $("#txt_ver_llantaSerial3").val(llantaSerial3);
-    $("#sel_ver_profundidad3").val(profundidad3).trigger('change');
-    $("#sel_ver_marca_llanta3").val(opmarca3).trigger('change');
-    $("#sel_ver_tipoMarca3").val(tipoMarca3).trigger('change');
-    $("#sel_ver_estado3").val(estado3).trigger('change');
-    $("#txt_ver_fInstalacion3").val(fInstalacion3);
-    $("#txt_ver_fReencauche3").val(fReencauche3);
-    $("#txt_ver_fCambio3").val(fCambio3);
-    $("#txt_ver_fRotacion3").val(fRotacion3);
-
-    $("#txt_ver_llantaSerial4").val(llantaSerial4);
-    $("#sel_ver_profundidad4").val(profundidad4).trigger('change');
-    $("#sel_ver_marca_llanta4").val(opmarca4).trigger('change');
-    $("#sel_ver_tipoMarca4").val(tipoMarca4).trigger('change');
-    $("#sel_ver_estado4").val(estado4).trigger('change');
-    $("#txt_ver_fInstalacion4").val(fInstalacion4);
-    $("#txt_ver_fReencauche4").val(fReencauche4);
-    $("#txt_ver_fCambio4").val(fCambio4);
-    $("#txt_ver_fRotacion4").val(fRotacion4);
-
-    $("#txt_ver_llantaSerial5").val(llantaSerial5);
-    $("#sel_ver_profundidad5").val(profundidad5).trigger('change');
-    $("#sel_ver_marca_llanta5").val(opmarca5).trigger('change');
-    $("#sel_ver_tipoMarca5").val(tipoMarca5).trigger('change');
-    $("#sel_ver_estado5").val(estado5).trigger('change');
-    $("#txt_ver_fInstalacion5").val(fInstalacion5);
-    $("#txt_ver_fReencauche5").val(fReencauche5);
-    $("#txt_ver_fCambio5").val(fCambio5);
-    $("#txt_ver_fRotacion5").val(fRotacion5);
-
-    $("#txt_ver_llantaSerial6").val(llantaSerial6);
-    $("#sel_ver_profundidad6").val(profundidad6).trigger('change');
-    $("#sel_ver_marca_llanta").val(opmarca6).trigger('change');
-    $("#sel_ver_tipoMarca6").val(tipoMarca6).trigger('change');
-    $("#sel_ver_estado6").val(estado6).trigger('change');
-    $("#txt_ver_fInstalacion6").val(fInstalacion6);
-    $("#txt_ver_fReencauche6").val(fReencauche6);
-    $("#txt_ver_fCambio6").val(fCambio6);
-    $("#txt_ver_fRotacion6").val(fRotacion6);
-
-
-    $("#txt_ver_cal1").val(calibracion1);
-    $("#txt_ver_cal2").val(calibracion2);
-    $("#txt_ver_cal3").val(calibracion3);
-    $("#txt_ver_cal4").val(calibracion4);
-    $("#txt_ver_cal5").val(calibracion5);
-    $("#txt_ver_cal6").val(calibracion6);
-    $("#txt_ver_oCalibracion").val(oCalibracion);
-    $("#sel_ver_bal1").val(balanceo1).trigger('change');
-    $("#sel_ver_bal2").val(balanceo2).trigger('change');
-    $("#sel_ver_bal3").val(balanceo3).trigger('change');
-    $("#sel_ver_bal4").val(balanceo4).trigger('change');
-    $("#sel_ver_bal5").val(balanceo5).trigger('change');
-    $("#sel_ver_bal6").val(balanceo6).trigger('change');
-    $("#txt_ver_oBalanceo").val(oBalanceo);
-    $("#sel_ver_alineacion1").val(alineacion1).trigger('change');
-    $("#sel_ver_alineacion2").val(alineacion2).trigger('change');
-    $("#txt_ver_obs3").val(observacionG3);
-    $("#txt_ver_obsM3").val(observacionM3);
-
-    $("#txt_ver_fechaA").val(fecha);
-    $("#txt_ver_pCambioA").val(pCambioA);
-    $("#txt_ver_kilometraje").val(kilometraje);
-    $("#txt_ver_ckilometraje").val(cKilometraje);
-    $("#sel_ver_tipo_aceite").val(tipoAceite).trigger('change');
-    $("#sel_ver_marca_aceite").val(marca10).trigger('change');
-    $("#txt_ver_cantidad").val(cantidad1);
-    $("#sel_ver_presentacion1").val(presentacion1).trigger('change');
-    $("#sel_ver_nivelacion1").val(nivelacion).trigger('change');
-    $("#txt_ver_cNivelacion1").val(cNivelacion);
-    $("#sel_ver_filtro_aceite").val(fAceite).trigger('change');
-    $("#sel_ver_filtro_combustible").val(fCombustible).trigger('change');
-    $("#sel_ver_filtro_aire").val(fAire).trigger('change');
-    $("#sel_ver_tipo_aceite1").val(tipoAceite1).trigger('change');
-    $("#sel_ver_marca_aceite1").val(marca1).trigger('change');
-    $("#txt_ver_uCambio1").val(uCambio);
-    $("#txt_ver_pCambio1").val(pCambio10);
-    $("#txt_ver_cantidad1").val(cantidad2);
-    $("#sel_ver_presentacion2").val(presentacion2).trigger('change');
-    $("#sel_ver_nivelacion2").val(nivelacion2).trigger('change');
-    $("#txt_ver_nivelacion2").val(cNivelacion2);
-
-    $("#sel_ver_tipo_aceite2").val(tipoAceite3).trigger('change');
-    $("#sel_ver_marca_aceite2").val(marca3).trigger('change');
-    $("#txt_ver_uCambio2").val(uCambio3);
-    $("#txt_ver_pCambio2").val(pCambio3);
-    $("#txt_ver_cantidad2").val(cantidad3);
-    $("#sel_ver_presentacion3").val(presentacion3).trigger('change');
-    $("#sel_ver_nivelacion3").val(nivelacion3).trigger('change');
-    $("#txt_ver_nivelacion3").val(cNivelacion3);
-
-    $("#sel_editar_tipo_aceite3").val(tipoAceite4).trigger('change');
-    $("#sel_editar_marca_aceite3").val(marca4).trigger('change');
-    $("#txt_editar_uCambio3").val(uCambio4);
-    $("#txt_editar_pCambio3").val(pCambio4);
-
-    $("#sel_ver_tipo_aceite4").val(tipoAceite5).trigger('change');
-    $("#sel_ver_marca_aceite4").val(marca5).trigger('change');
-    $("#txt_ver_uCambio4").val(uCambio5);
-    $("#txt_ver_pCambio4").val(pCambio5);
-
-    $("#sel_ver_lFreno").val(lFreno).trigger('change');
-    $("#sel_ver_lParabrisa").val(lParabrisa).trigger('change');
-    $("#sel_ver_refrigerante").val(refrigerante).trigger('change');
-    $("#sel_ver_hidraulico").val(hidraulico).trigger('change');
-    $("#sel_ver_lMotor").val(lMotor).trigger('change');
-    $("#sel_ver_lCaja").val(lCaja).trigger('change');
-    $("#sel_ver_lTransmision").val(lTransmision).trigger('change');
-
-    $("#sel_ver_lFrenos1").val(lFrenos1).trigger('change');
-    $("#sel_ver_engrase").val(engrase).trigger('change');
-    $("#sel_ver_sRadiador").val(sRadiador).trigger('change');
-    $("#sel_ver_sFiltroAire").val(sFiltroAire).trigger('change');
-
-    
-    $("#txt_ver_observacionesF").val(observacionesF);
-
-    $("#sel_ver_filtro_combustible2").val(fCombustible2).trigger('change');
-    $("#sel_ver_filtro_combustible3").val(fCombustible3).trigger('change');
-
+    $("#sel_placa_ver").val(placa).trigger('change');
+    $("#txt_fIngreso_ver").val(fIngreso);
+    $("#sel_tecnico_ver").val(tecnico).trigger('change');
+    $("#txt_observaciones1_ver").val(observaciones1);
+    $("#sel_reloj_ver").val(reloj).trigger('change');
+    $("#sel_radio_ver").val(radio).trigger('change');
+    $("#sel_cd_ver").val(cd).trigger('change');
+    $("#sel_gato_ver").val(gato).trigger('change');
+    $("#sel_encendedor_ver").val(encendedor).trigger('change');
+    $("#sel_cenicero_ver").val(cenicero).trigger('change');
+    $("#sel_forro_ver").val(forro).trigger('change');
+    $("#sel_herramienta_ver").val(herramienta).trigger('change');
+    $("#sel_rueda_ver").val(rueda).trigger('change');
+    $("#sel_tapete_ver").val(tapete).trigger('change');
+    $("#sel_cuchilla_ver").val(cuchilla).trigger('change');
+    $("#sel_llavero_ver").val(llavero).trigger('change');
+    $("#sel_tercerStop_ver").val(tercerStop).trigger('change');
+    $("#sel_emblema_ver").val(emblema).trigger('change');
+    $("#sel_parasol_ver").val(parasol).trigger('change');
+    $("#sel_manija_ver").val(manija).trigger('change');
+    $("#sel_cinturon_ver").val(cinturon).trigger('change');
+    $("#sel_copa_ver").val(copa).trigger('change');
+    $("#sel_espejo_ver").val(espejo).trigger('change');
+    $("#sel_antena_ver").val(antena).trigger('change');
+    $("#sel_exploradora_ver").val(exploradora).trigger('change');
+    $("#observaciones2_ver").val(observaciones2);
+    $("#sel_1_ver").val(numero1).trigger('change');
+    $("#sel_2_ver").val(numero2).trigger('change');
+    $("#sel_3_ver").val(numero3).trigger('change');
+    $("#sel_4_ver").val(numero4).trigger('change');
+    $("#sel_5_ver").val(numero5).trigger('change');
+    $("#sel_6_ver").val(numero6).trigger('change');
+    $("#sel_7_ver").val(numero7).trigger('change');
+    $("#sel_8_ver").val(numero8).trigger('change');
+    $("#sel_9_ver").val(numero9).trigger('change');
+    $("#sel_10_ver").val(numero10).trigger('change');
+    $("#sel_11_ver").val(numero11).trigger('change');
+    $("#sel_12_ver").val(numero12).trigger('change');
+    $("#sel_13_ver").val(numero13).trigger('change');
+    $("#sel_14_ver").val(numero14).trigger('change');
+    $("#sel_15_ver").val(numero15).trigger('change');
+    $("#sel_16_ver").val(numero16).trigger('change');
+    $("#sel_17_ver").val(numero17).trigger('change');
+    $("#sel_18_ver").val(numero18).trigger('change');
+    $("#sel_19_ver").val(numero19).trigger('change');
+    $("#txt_observaciones3_ver").val(observaciones3);
+    $("#sel_servicio1_ver").val(servicio1).trigger('change');
+    $("#sel_servicio2_ver").val(servicio2).trigger('change');
+    $("#sel_servicio3_ver").val(servicio3).trigger('change');
+    $("#sel_servicio4_ver").val(servicio4).trigger('change');
+    $("#sel_servicio5_ver").val(servicio5).trigger('change');
+    $("#sel_servicio6_ver").val(servicio6).trigger('change');
+    $("#txt_observaciones4_ver").val(observaciones4);
 });
 
 // FUNCION PARA EDITAR REGISTRO

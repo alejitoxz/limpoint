@@ -17,13 +17,13 @@ session_start();
 
             if ($Rol == 2) {
                 $wr = "and pro.idUsuario = $idUsuario";
-                $com = "and c.id = $idCompany";
+                $com = "and pro.idCompany = $idCompany";
             }else if ($Rol == 1) {
                 $com = "";
                 $wr = "";
             }else{ 
                 $wr = "";
-                $com = "and c.id = $idCompany";
+                $com = "and pro.idCompany = $idCompany";
             }
             $sql  = "SELECT
             pro.id,
@@ -40,7 +40,6 @@ session_start();
             pro.estatus = 1
             $com $wr
             ";
-           //echo $sql;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -62,6 +61,38 @@ session_start();
            
         }
 
+        function listar_alianzap(){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+            $sql  = "SELECT 
+            m.id, 
+            m.descripcion as alianza
+            from 
+            miscelaneos_detalle as m
+            INNER JOIN miscelaneos AS mi ON ( mi.id = m.id_miscelaneo ) 
+            where m.estatus = 1  AND m.id_miscelaneo = 1";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+			$i = 0;
+            $data = [];
+			while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+			{
+				$data[$i] = $row;
+				$i++;
+			}
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
 
         function buscar_personaP($valor){
             $conn = $this->conexion->conectar();
@@ -93,7 +124,7 @@ session_start();
         }
 
         //revisar el tema del alert, no funciona bien
-        function registrar_propietario($id,$nombre,$apellido,$telefono,$email){
+        function registrar_propietario($id,$nombre,$apellido,$telefono,$email,$placa,$tipoVehiculo,$alianza){
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
             $cadena = "";
@@ -101,8 +132,13 @@ session_start();
                 INSERT INTO persona(nombre,apellido,telefono,email)
                 VALUES('$nombre','$apellido','$telefono','$email')
                 SET @idPersona = SCOPE_IDENTITY()
+                DECLARE @idPropietario int
                 INSERT INTO propietario(idPersona,estatus,idCompany,idUsuario) 
-                VALUES(@idPersona,1,$idCompany,$idUsuario)";
+                VALUES(@idPersona,1,$idCompany,$idUsuario)
+                SET @idPropietario = SCOPE_IDENTITY()
+                INSERT INTO vehiculo(placa,tipoVehiculo,alianza,estatus,idPropietario,idCompany,idUsuario)
+                VALUES('$placa','$tipoVehiculo','$alianza',1,@idPropietario,$idCompany,$idUsuario)
+                ";
             $conn = $this->conexion->conectar();
             $sql  = "BEGIN TRY
                      BEGIN TRAN

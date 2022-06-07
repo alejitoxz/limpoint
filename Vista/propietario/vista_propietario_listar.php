@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="card card-success">
             <div class="card-header">
-            <h3 class="card-title">Bienvenido al contenido de los Propietarios</h3>
+            <h3 class="card-title">Bienvenido al contenido de los clientes</h3>
 
             <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
@@ -55,6 +55,31 @@
           <!-- FORMULARIO REGISTRO DE USUARIOS, CAMPOS -->
         <form class="form">
 
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Placa</label>
+              <input type="text" class="form-control" id="txt_placa" placeholder="Ingrese la placa"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Tipo de vehiculo</label>
+              <select class="js-example-basic-single"  name="state" id="sel_tipoVehiculo" style="width:100%; heigth: 40px;">
+                <option value="0">Seleccionar</option>
+                <option value="1">Camioneta</option>
+                <option value="1">Auto</option>
+              </select><br><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Alianza</label>
+              <select class="js-example-basic-single"  name="state" id="sel_alianzap" style="width:100%; heigth: 40px;">
+              </select><br><br>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -147,11 +172,14 @@
     </div>
   </div>
   </form>
+  
 <script type="text/javascript" src="../js/propietario.js"></script>
 
 <script>
   $(document).ready(function(){
     listar_propietario();
+    listar_alianzap();
+    $('.js-example-basic-single').select2();
     $("#modal_registro_propietario").on('shown.bs.modal',function(){
 
     });
