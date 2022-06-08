@@ -327,6 +327,8 @@ if(isset($Datos[$i]['submodulos'])){
 <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- Bootstrap Switch -->
 <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
 <script>
 
 $(document).ready(function(){

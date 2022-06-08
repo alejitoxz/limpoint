@@ -51,12 +51,7 @@
     $numero19 = htmlspecialchars($_POST['numero19'],ENT_QUOTES,'UTF-8');
     $observaciones3 = htmlspecialchars($_POST['observaciones3'],ENT_QUOTES,'UTF-8');
 
-    $servicio1 = htmlspecialchars($_POST['servicio1'],ENT_QUOTES,'UTF-8');
-    $servicio2 = htmlspecialchars($_POST['servicio2'],ENT_QUOTES,'UTF-8');
-    $servicio3 = htmlspecialchars($_POST['servicio3'],ENT_QUOTES,'UTF-8');
-    $servicio4 = htmlspecialchars($_POST['servicio4'],ENT_QUOTES,'UTF-8');
-    $servicio5 = htmlspecialchars($_POST['servicio5'],ENT_QUOTES,'UTF-8');
-    $servicio6 = htmlspecialchars($_POST['servicio6'],ENT_QUOTES,'UTF-8');
+    $servicio1 = $_POST['servicio1'];
     $observaciones4 = htmlspecialchars($_POST['observaciones4'],ENT_QUOTES,'UTF-8');
     
     $consulta = $MU->registrar_ordenServicio(
@@ -67,7 +62,6 @@
     $exploradora,$observaciones2,$numero1,$numero2,$numero3,$numero4,
     $numero5,$numero6,$numero7,$numero8,$numero9,$numero10,
     $numero11,$numero12,$numero13,$numero14,$numero15,$numero16,
-    $numero17,$numero18,$numero19,$observaciones3,$servicio1,$servicio2,
-    $servicio3,$servicio4,$servicio5,$servicio6,$observaciones4
+    $numero17,$numero18,$numero19,$observaciones3,$servicio1,$observaciones4
     );
     echo $consulta;

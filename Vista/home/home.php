@@ -77,6 +77,7 @@ if ($Rol == 1 || $Rol == 2) {
 ?>
 
 
+<!--
 <div class="col-md-12">
   <div class="card card-primary">
       <div class="card-header">
@@ -96,7 +97,6 @@ if ($Rol == 1 || $Rol == 2) {
           <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;" width="487" height="250" class="chartjs-render-monitor"></canvas>
         </div>
       </div>
-      <!-- /.card-body -->
   </div>
 </div>
 
@@ -120,7 +120,7 @@ if ($Rol == 1 || $Rol == 2) {
         </canvas>
         </div>
       </div>
-      <!-- /.card-body -->
+
   </div>
 </div>
 <div class="col-md-6">
@@ -133,12 +133,10 @@ if ($Rol == 1 || $Rol == 2) {
           <canvas id="areaChartBateria" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;" width="487" height="250" class="chartjs-render-monitor"></canvas>
         </div>
       </div>
-      <!-- /.card-body -->
   </div>
 </div>
 </div>
 
-<!--
 <div class="row">
 <div class="col-md-6">
   <div class="card card-primary">
@@ -159,9 +157,9 @@ if ($Rol == 1 || $Rol == 2) {
         </canvas>
         </div>
       </div>
-       /.card-body 
+       
   </div>
-</div> -->
+</div> 
 <div class="col-md-12">
   <div class="card card-primary">
       <div class="card-header">
@@ -183,8 +181,8 @@ if ($Rol == 1 || $Rol == 2) {
         <h1 class="card-title"><b>Proximos vencimientos</b></h1>
         </div>
         <div class="card-body">
-            <!-- /.card-header -->
-            <div class="card-body">
+             /.card-header -->
+            <!--<div class="card-body">
             <div class="form-group">
                 <div class="col-lg-10">
                     <div class="col-lg-2">
@@ -207,12 +205,12 @@ if ($Rol == 1 || $Rol == 2) {
             </tbody>
         </table>
         </div>
-            <!-- /.card-body -->
-    </div>
-            <!-- /.card -->
+             /.card-body -->
+    <!--</div>
+             /.card 
     </div>
 </div>
-
+-->
 
 
 <script src="../js/home.js"></script>

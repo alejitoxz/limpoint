@@ -548,23 +548,22 @@ session_start();
             $this->conexion->conectar();
         }
 
-        function registrar_ordenServicio($placa,$fIngreso,$tecnico,$observaciones1,$reloj,$radio,
-        $cd,$gato,$encendedor,$cenicero,$forro,$herramienta,
-        $rueda,$tapete,$cuchilla,$llavero,$tercerStop,$emblema,
-        $parasol,$manija,$cinturon,$copa,$espejo,$antena,
-        $exploradora,$observaciones2,$numero1,$numero2,$numero3,$numero4,
-        $numero5,$numero6,$numero7,$numero8,$numero9,$numero10,
-        $numero11,$numero12,$numero13,$numero14,$numero15,$numero16,
-        $numero17,$numero18,$numero19,$observaciones3,$servicio1,$servicio2,
-        $servicio3,$servicio4,$servicio5,$servicio6,$observaciones4){
+        function registrar_ordenServicio(
+            $placa,$fIngreso,$tecnico,$observaciones1,$reloj,$radio,
+            $cd,$gato,$encendedor,$cenicero,$forro,$herramienta,
+            $rueda,$tapete,$cuchilla,$llavero,$tercerStop,$emblema,
+            $parasol,$manija,$cinturon,$copa,$espejo,$antena,
+            $exploradora,$observaciones2,$numero1,$numero2,$numero3,$numero4,
+            $numero5,$numero6,$numero7,$numero8,$numero9,$numero10,
+            $numero11,$numero12,$numero13,$numero14,$numero15,$numero16,
+            $numero17,$numero18,$numero19,$observaciones3,$servicio1,$observaciones4){
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
             $date=@date('Y-m-d H:i:s');
-            $cadena = "";
+            //var_dump($servicio1); exit;
             
-                
-                $cadena = "
-                INSERT INTO servicio(
+            $conn = $this->conexion->conectar();
+                $sql = "INSERT INTO servicio(
                             idVehiculo,
                             fIngreso,
                             tecnico,
@@ -612,12 +611,6 @@ session_start();
                             numero18,
                             numero19,
                             Observaciones3,
-                            servicio1,
-                            servicio2,
-                            servicio3,
-                            servicio4,
-                            servicio5,
-                            servicio6,
                             observaciones4,
                             estatus,
                             idCompany,
@@ -673,12 +666,6 @@ session_start();
                     $numero18,
                     $numero19,
                     '$observaciones3',
-                    $servicio1,
-                    $servicio2,
-                    $servicio3,
-                    $servicio4,
-                    $servicio5,
-                    $servicio6,
                     '$observaciones4',
                     1,
                     $idCompany,
@@ -687,20 +674,42 @@ session_start();
                 )
                 ";
             
-            
-            $conn = $this->conexion->conectar();
-            $sql  = "BEGIN TRY
-                     BEGIN TRAN
-                     
-                     $cadena
-                     
-                     COMMIT TRAN
-                     END TRY
-                     BEGIN CATCH
-                     ROLLBACK TRAN
-                     END CATCH";
             $resp = sqlsrv_query($conn, $sql);
+            //consulta para tener el ultimo id de servicio
+            $sql2 ="SELECT MAX
+            ( id ) as idServicio
+            FROM
+            servicio 
+            ";
+            $resp = sqlsrv_query($conn, $sql2);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data = $row;
+                $i++;
+                
+            }
+            $idServicio2 = $data["idServicio"];
+            for ($y=0; $y < count($servicio1); $y++) { 
+                $sql3 = "insert into servicioTarifa (
+                    idServicio,
+                    idTarifa,
+                    estatus
+                ) Values(
+                    $idServicio2,
+                    $servicio1[$y],
+                    1
+                )";
+                $resp = sqlsrv_query($conn, $sql3);
+                if( $resp === false) {
+                    return 0;
+                }
+            }
             
+
             if( $resp === false) {
                 return 0;
             }else{

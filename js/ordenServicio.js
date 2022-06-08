@@ -167,22 +167,10 @@ function listar_servicio(){
         console.log("entra",resp)
         var cadena="";
         if(data.length>0){
-            cadena+="<option value='0'>Seleccionar</option>"; 
             for(var i=0; i < data.length; i++){
                 cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['orden']+"</option>";
             }
             $("#sel_servicio1").html(cadena);
-            $("#sel_servicio2").html(cadena);
-            $("#sel_servicio3").html(cadena);
-            $("#sel_servicio4").html(cadena);
-            $("#sel_servicio5").html(cadena);
-            $("#sel_servicio6").html(cadena);
-            $("#sel_servicio1_ver").html(cadena);
-            $("#sel_servicio2_ver").html(cadena);
-            $("#sel_servicio3_ver").html(cadena);
-            $("#sel_servicio4_ver").html(cadena);
-            $("#sel_servicio5_ver").html(cadena);
-            $("#sel_servicio6_ver").html(cadena);
 
         }else{
             cadena+="<option value =''>No se encontraron registros</option>"; 
@@ -432,23 +420,113 @@ function registrar_Servicio(){
     var numero19 = $("#sel_19").val();
     var observaciones3 = $("#txt_observaciones3").val();
     var servicio1 = $("#sel_servicio1").val();
-    var servicio2 = $("#sel_servicio2").val();
-    var servicio3 = $("#sel_servicio3").val();
-    var servicio4 = $("#sel_servicio4").val();
-
-    var servicio5 = $("#sel_servicio5").val();
-    var servicio6 = $("#sel_servicio6").val();
     var observaciones4 = $("#txt_observaciones4").val();
-
-    var inv_reloj = $("#inv_reloj").bootstrapSwitch('state');
-    var inv_radio = $("#inv_radio").bootstrapSwitch('state');
-
-
-
-    console.log("reloj",$("#inv_reloj").bootstrapSwitch('state'));
-    console.log("radio",$("#inv_radio").bootstrapSwitch('state'));
-    return;
     
+    if (tapete == "on") {
+        tapete = 1;
+    }else{
+        tapete= 0
+    }
+    if (reloj == "on") {
+        reloj = 1;
+    }else{
+        reloj= 0
+    }
+    if (cd == "on") {
+        cd = 1;
+    }else{
+        cd= 0
+    }
+    if (radio == "on") {
+        radio = 1;
+    }else{
+        radio= 0
+    }
+    if (gato == "on") {
+        gato = 1;
+    }else{
+        gato= 0
+    }
+    if (encendedor == "on") {
+        encendedor = 1;
+    }else{
+        encendedor= 0
+    }
+    if (cenicero == "on") {
+        cenicero = 1;
+    }else{
+        cenicero= 0
+    }
+    if (forro == "on") {
+        forro = 1;
+    }else{
+        forro= 0
+    }
+    if (herramienta == "on") {
+        herramienta = 1;
+    }else{
+        herramienta= 0
+    }if (rueda == "on") {
+        rueda = 1;
+    }else{
+        rueda= 0
+    }
+    if (cuchilla == "on") {
+        cuchilla = 1;
+    }else{
+        cuchilla= 0
+    }
+    if (llavero == "on") {
+        llavero = 1;
+    }else{
+        llavero= 0
+    }
+    if (tercerStop == "on") {
+        tercerStop = 1;
+    }else{
+        tercerStop= 0
+    }
+    if (emblema == "on") {
+        emblema = 1;
+    }else{
+        emblema= 0
+    }
+    if (parasol == "on") {
+        parasol = 1;
+    }else{
+        parasol= 0
+    }
+    if (manija == "on") {
+        manija = 1;
+    }else{
+        manija= 0
+    }
+    if (cinturon == "on") {
+        cinturon = 1;
+    }else{
+        cinturon= 0
+    }
+    if (copa == "on") {
+        copa = 1;
+    }else{
+        copa= 0
+    }
+    if (espejo == "on") {
+        espejo = 1;
+    }else{
+        espejo= 0
+    }
+    if (antena == "on") {
+        antena = 1;
+    }else{
+        antena= 0
+    }
+    if (exploradora == "on") {
+        exploradora = 1;
+    }else{
+        exploradora= 0
+    }
+    console.log("reloj",reloj);
 
     $.ajax({
         "url": "../controlador/ordenServicio/controlador_ordenServicio_registro.php",
@@ -503,11 +581,6 @@ function registrar_Servicio(){
         numero19:numero19,
         observaciones3:observaciones3,
         servicio1:servicio1,
-        servicio2:servicio2,
-        servicio3:servicio3,
-        servicio4:servicio4,
-        servicio5:servicio5,
-        servicio6:servicio6,
         observaciones4:observaciones4
         }
     }).done(function(resp){

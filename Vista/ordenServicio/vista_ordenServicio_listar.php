@@ -79,7 +79,7 @@ $Rol = $_SESSION['ROL'];
                     <!-- DATOS DEL VEHICULO -->
                     <div class="step active" data-target="#datos-part" onclick="stepper.to(1)">
                       <button type="button" class="step-trigger" role="tab" aria-controls="datos-part" id="datos-trigger" aria-selected="true">
-                        <span class="bs-stepper-circle"><i class="fas fa-bus"></i></span>
+                        <span class="bs-stepper-circle"><i class="fas fa-truck-monster"></i></span>
                         <span class="bs-stepper-label">Datos del vehículo</span>
                       </button>
                     </div>
@@ -88,7 +88,7 @@ $Rol = $_SESSION['ROL'];
                     <div class="line"></div>
                     <div class="step" data-target="#bateria-part" onclick="stepper.to(2)">
                       <button type="button" class="step-trigger" role="tab" aria-controls="bateria-part" id="bateria-trigger" aria-selected="false">
-                        <span class="bs-stepper-circle"><i class="fas fa-car-battery"></i></span>
+                        <span class="bs-stepper-circle"><i class="fas fa-boxes"></i></span>
                         <span class="bs-stepper-label">Inventario del vehiculo</span>
                       </button>
                     </div>
@@ -97,7 +97,7 @@ $Rol = $_SESSION['ROL'];
                     <div class="line"></div>
                     <div class="step" data-target="#llanta-part" onclick="stepper.to(3)">
                       <button type="button" class="step-trigger" role="tab" aria-controls="llanta-part" id="llanta-trigger" aria-selected="false" >
-                        <span class="bs-stepper-circle"><i class="fas fa-ring"></i></span>
+                        <span class="bs-stepper-circle"><i class="fas fa-align-justify"></i></span>
                         <span class="bs-stepper-label">Estado vehiculo</span>
                       </button>
                     </div>  
@@ -105,7 +105,7 @@ $Rol = $_SESSION['ROL'];
                     <div class="line"></div>
                     <div class="step" data-target="#aceite-part" onclick="stepper.to(4)">
                       <button type="button" class="step-trigger" role="tab" aria-controls="aceite-part" id="aceite-trigger" aria-selected="false" >
-                        <span class="bs-stepper-circle"><i class="fas fa-oil-can"></i></span>
+                        <span class="bs-stepper-circle"><i class="fas fa-folder-open"></i></span>
                         <span class="bs-stepper-label">Servicio</span>
                       </button>
                     </div>
@@ -132,7 +132,7 @@ $Rol = $_SESSION['ROL'];
                         </div>
                       <div class="col-md-4">
                           <div class="form-group">
-                            <label for="">Técnico</label>
+                            <label for="">Operario</label>
                             <select class="js-example-basic-single" id="sel_tecnico" name="state" style="width:100%; heigth: 40px;"> 
                             <option value="0">Seleccionar</option>
                             <option value="1">Diego Caycedo</option>  
@@ -160,138 +160,140 @@ $Rol = $_SESSION['ROL'];
                     <div class="row">
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Reloj</label>
-                            <input type="checkbox" name="sel_reloj" id="sel_reloj" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Reloj</label><br>
+                            <input type="checkbox" name="sel_reloj" style="margin:auto;" id="sel_reloj" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                           </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Radio-Caratula</label>
-                            <input type="checkbox" name="sel_radio" id="sel_radio" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Radio-Caratula</label><br>
+                            <input type="checkbox" style="margin:auto;" name="sel_radio" id="sel_radio" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">CDs-Casetes</label>
-                            <input type="checkbox" name="sel_cd" id="sel_cd" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">CDs-Casetes</label><br>
+                            <input type="checkbox" name="sel_cd" style="margin:auto;" id="sel_cd" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Gato-palanca</label>
-                            <input type="checkbox" name="sel_gato" id="sel_gato" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Gato-palanca</label><br>
+                            <input type="checkbox" name="sel_gato" style="margin:auto;" id="sel_gato" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       </div>
                     <div class="row">  
                     <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Encendedor</label>
-                            <input type="checkbox" name="sel_encendedor" id="sel_encendedor" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Encendedor</label><br>
+                            <input type="checkbox" name="sel_encendedor" style="margin:auto;" id="sel_encendedor" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Cenicero</label>
-                            <input type="checkbox" name="sel_cenicero" id="sel_cenicero" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Cenicero</label><br>
+                            <input type="checkbox" name="sel_cenicero" style="margin:auto;" id="sel_cenicero" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Forros</label>
-                            <input type="checkbox" name="sel_forro" id="sel_forro" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Forros</label><br>
+                            <input type="checkbox" name="sel_forro" style="margin:auto;" id="sel_forro" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Herramienta</label>
-                            <input type="checkbox" name="sel_herramienta" id="sel_herramienta" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Herramienta</label><br>
+                            <input type="checkbox" name="sel_herramienta" style="margin:auto;" id="sel_herramienta" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       </div>
+                      <div class="row">
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Rueda repuesto</label>
-                            <input type="checkbox" name="sel_rueda" id="sel_rueda" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Rueda repuesto</label><br>
+                            <input type="checkbox" name="sel_rueda" style="margin:auto;" id="sel_rueda" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
+                      </div>
                       </div>
                     </div>
                     <div class="callout callout-danger">
                     <div class="row"> 
                     <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Tapetes</label>
-                            <input type="checkbox" style="float:right;" name="sel_tapete" id="sel_tapete" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Tapetes</label><br>
+                            <input type="checkbox" style="float:right;" style="margin:auto;" name="sel_tapete" id="sel_tapete" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Cuchilla limpia</label>
-                            <input type="checkbox" name="sel_cuchilla" id="sel_cuchilla" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Cuchilla limpia</label><br>
+                            <input type="checkbox" name="sel_cuchilla" style="margin:auto;" id="sel_cuchilla" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">llavero</label>
-                            <input type="checkbox" name="sel_llavero" id="sel_llavero" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">llavero</label><br>
+                            <input type="checkbox" name="sel_llavero" style="margin:auto;" id="sel_llavero" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Tercer stop</label>
-                            <input type="checkbox" name="sel_tercerStop" id="sel_tercerStop" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Tercer stop</label><br>
+                            <input type="checkbox" name="sel_tercerStop" style="margin:auto;"  id="sel_tercerStop" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                     </div>
                     <div class="row"> 
                     <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Emblemas</label>
-                            <input type="checkbox" name="sel_emblema" id="sel_emblema" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Emblemas</label><br>
+                            <input type="checkbox" name="sel_emblema" style="margin:auto;" id="sel_emblema" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Parasoles</label>
-                            <input type="checkbox" name="sel_parasol" id="sel_parasol" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Parasoles</label><br>
+                            <input type="checkbox" name="sel_parasol" style="margin:auto;" id="sel_parasol" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Manija</label>
-                            <input type="checkbox" name="sel_manija" id="sel_manija" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Manija</label><br>
+                            <input type="checkbox" name="sel_manija" style="margin:auto;" id="sel_manija" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Cinturon seg.</label>
-                            <input type="checkbox" name="sel_cinturon" id="sel_cinturon" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Cinturon seg.</label><br>
+                            <input type="checkbox" name="sel_cinturon" style="margin:auto;" id="sel_cinturon" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                     </div>
                     <div class="row"> 
                     <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Copas ruedas</label>
-                            <input type="checkbox" name="sel_copa" id="sel_copa" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Copas ruedas</label><br>
+                            <input type="checkbox" name="sel_copa" style="margin:auto;" id="sel_copa" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Espejos</label>
-                            <input type="checkbox" name="sel_espejo" id="sel_espejo" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Espejos</label><br>
+                            <input type="checkbox" name="sel_espejo" style="margin:auto;" id="sel_espejo" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Antena</label>
-                            <input type="checkbox" name="sel_antena" id="sel_antena" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Antena</label><br>
+                            <input type="checkbox" name="sel_antena" style="margin:auto;" id="sel_antena" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                       <div class="col-md-3">
                           <div class="form-group">
-                            <label for="">Exploradoras</label>
-                            <input type="checkbox" name="sel_exploradora" id="sel_exploradora" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <label for="">Exploradoras</label><br>
+                            <input type="checkbox" name="sel_exploradora" style="margin:auto;" id="sel_exploradora" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           </div>
                       </div>
                     </div>
@@ -314,126 +316,201 @@ $Rol = $_SESSION['ROL'];
 
                   <div class="callout callout-danger">
                   <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#1</label>
-                            <input type="checkbox" name="sel_1" id="sel_1" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_1" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#2</label>
-                            <input type="checkbox" name="sel_2" id="sel_2" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_2" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#3</label>
-                            <input type="checkbox" name="sel_3" id="sel_3" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_3" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#4</label>
-                            <input type="checkbox" name="sel_4" id="sel_4" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_4" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
+                          </div>
+                      </div>
+                      <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="">#5</label>
+                            <select class="js-example-basic-single" id="sel_5" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
+                          </div>
+                      </div>
+                      <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="">#6</label>
+                            <select class="js-example-basic-single" id="sel_6" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
                       </div>
                     <div class="row">  
-                    <div class="col-md-3">
-                          <div class="form-group">
-                            <label for="">#5</label>
-                            <input type="checkbox" name="sel_5" id="sel_5" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                          </div>
-                      </div>
-                      <div class="col-md-3">
-                          <div class="form-group">
-                            <label for="">#6</label>
-                            <input type="checkbox" name="sel_6" id="sel_6" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                          </div>
-                      </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#7</label>
-                            <input type="checkbox" name="sel_7" id="sel_7" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_7" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#8</label>
-                            <input type="checkbox" name="sel_8" id="sel_8" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_8" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      </div>
-                    <div class="row"> 
-                    <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#9</label>
-                            <input type="checkbox" name="sel_9" id="sel_9" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_9" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#10</label>
-                            <input type="checkbox" name="sel_10" id="sel_10" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_10" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#11</label>
-                            <input type="checkbox" name="sel_11" id="sel_11" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_11" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#12</label>
-                            <input type="checkbox" name="sel_12" id="sel_12" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_12" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                    </div>
+                      </div>
                     <div class="row"> 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#13</label>
-                            <input type="checkbox" name="sel_13" id="sel_13" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_13" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#14</label>
-                            <input type="checkbox" name="sel_14" id="sel_14" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_14" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#15</label>
-                            <input type="checkbox" name="sel_15" id="sel_15" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_15" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#16</label>
-                            <input type="checkbox" name="sel_16" id="sel_16" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_16" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
+                          </div>
+                      </div>
+                      <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="">#17</label>
+                            <select class="js-example-basic-single" id="sel_17" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
+                          </div>
+                      </div>
+                      <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="">#18</label>
+                            <select class="js-example-basic-single" id="sel_18" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
                     </div>
                     <div class="row"> 
-                    <div class="col-md-3">
-                          <div class="form-group">
-                            <label for="">#17</label>
-                            <input type="checkbox" name="sel_17" id="sel_17" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                          </div>
-                      </div>
-                      <div class="col-md-3">
-                          <div class="form-group">
-                            <label for="">#18</label>
-                            <input type="checkbox" name="sel_18" id="sel_18" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                          </div>
-                      </div>
-                      <div class="col-md-3">
+                    
+                      <div class="col-md-2">
                           <div class="form-group">
                             <label for="">#19</label>
-                            <input type="checkbox" name="sel_19" id="sel_19" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <select class="js-example-basic-single" id="sel_19" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Ninguno</option>
+                            <option value="1">Golpe</option>  
+                            <option value="1">Rayon</option> 
+                            </select><br><br>
                           </div>
                       </div>
                     </div>
@@ -463,53 +540,18 @@ $Rol = $_SESSION['ROL'];
 
 
                       <div class="callout callout-danger">
-                        <h5 class="text-danger">CAMBIO DE ACEITE DEL MOTOR</h5>
                         
-                        <div class="row">
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="">Servicio</label>
-                              <select class="js-example-basic-single"  name="state" id="sel_servicio1" style="width:100%; heigth: 40px;">   
-                              </select><br><br>
+                        <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Servicios</label>
+                                <div class="select2-purple">
+                                <select class="select2" multiple="multiple" id="sel_servicio1" data-placeholder="Selecciona los campos" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                  
+                                </select>
+                              </div>
+                              </div>
+                              <!-- /.form-group -->
                             </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="">Servicio</label>
-                              <select class="js-example-basic-single"  name="state" id="sel_servicio2" style="width:100%; heigth: 40px;">
-                              </select><br><br>
-                            </div>
-                          </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="">Servicio</label>
-                              <select class="js-example-basic-single"  name="state" id="sel_servicio3" style="width:100%; heigth: 40px;">   
-                              </select><br><br>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="">Servicio</label>
-                              <select class="js-example-basic-single"  name="state" id="sel_servicio4" style="width:100%; heigth: 40px;">   
-                              </select><br><br>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="">Servicio</label>
-                              <select class="js-example-basic-single"  name="state" id="sel_servicio5" style="width:100%; heigth: 40px;">   
-                              </select><br><br>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="">Servicio</label>
-                              <select class="js-example-basic-single"  name="state" id="sel_servicio6" style="width:100%; heigth: 40px;">   
-                              </select><br><br>
-                            </div>
-                          </div>
-                          
-                        </div> 
                         <div class="col-md-13">
                           <div class="form-group">
                             <label for="">Observaciones:</label>
@@ -2675,6 +2717,14 @@ $Rol = $_SESSION['ROL'];
   
   fechaCochenta();
 
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
     $("#sel_reloj").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
@@ -2749,72 +2799,7 @@ $Rol = $_SESSION['ROL'];
     $("#sel_exploradora").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
-
-    $("#sel_1").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_2").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-    $("#sel_3").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_4").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-    $("#sel_5").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_6").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-    $("#sel_7").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_8").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_9").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-    $("#sel_10").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_11").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-    $("#sel_12").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_13").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_14").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-    $("#sel_15").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_16").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-    $("#sel_17").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_18").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-    $("#sel_19").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-      
+    
 
 
 </script>
