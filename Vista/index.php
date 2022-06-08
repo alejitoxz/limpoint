@@ -42,7 +42,7 @@ exit;*/
   <title>LIMPOINT</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="../Vista/imagenes/icon_taxi2.png" />
+  <link rel="shortcut icon" href="../Vista/imagenes/logo-spv.png" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -66,6 +66,7 @@ exit;*/
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="../plantilla/DataTables/datatables.min.css">
   <link rel="stylesheet" href="../plantilla/select2/select2.min.css">
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- BS Stepper -->
   <link rel="stylesheet" href="plugins/bs-stepper/css/bs-stepper.min.css">
 </head>
@@ -73,7 +74,7 @@ exit;*/
 <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="../Vista/imagenes/icon_taxi2.png" alt="AdminLTELogo" height="60" width="60">
+      <img class="animation__shake" src="../Vista/imagenes/icon_taxi2.png" alt="AdminLTELogo" height="100" width="100">
     </div>
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -118,7 +119,7 @@ exit;*/
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="imagenes/logo-Spv.png">
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo $_SESSION['USUARIO'];  ?></a>
@@ -328,7 +329,9 @@ if(isset($Datos[$i]['submodulos'])){
 <!-- Bootstrap Switch -->
 <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <script src="plugins/select2/js/select2.full.min.js"></script>
-<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+
+
 <script>
 
 $(document).ready(function(){

@@ -1,7 +1,7 @@
 <?php
-    require '../../modelo/modelo_ordenServicio.php';
+    require '../../modelo/modelo_home.php';
 
-    $MU = new modelo_ordenServicio();
+    $MU = new modelo_home();
     $inicioDate = htmlspecialchars($_POST['inicioDate'],ENT_QUOTES,'UTF-8');
     $finDate = htmlspecialchars($_POST['finDate'],ENT_QUOTES,'UTF-8');
     $consulta = $MU->contador_orden($inicioDate,$finDate);

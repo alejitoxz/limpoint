@@ -140,11 +140,25 @@ $Rol = $_SESSION['ROL'];
                           </div>
                       </div>
                       </div>
+                      <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="">Tipo de lavado</label>
+                            <select class="js-example-basic-single" id="sel_tipoLavado" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Seleccionar</option>
+                            <option value="1">Lavado en seco</option>  
+                            <option value="2">Lavado con agua</option> 
+                            </select><br><br>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="row">
                       <div class="col-md-12">
                           <div class="form-group">
                             <label for="">Observaciones</label>
                             <textarea class="form-control" id="txt_observaciones1" placeholder="observaciones"></textarea><br>
                           </div>
+                        </div>
                         </div>
                         </div>
                       <button class="btn btn-primary" onclick="stepper.next()">Siguiente</button>
@@ -540,8 +554,8 @@ $Rol = $_SESSION['ROL'];
 
 
                       <div class="callout callout-danger">
-                        
-                        <div class="col-12 col-sm-6">
+                        <div class="row">
+                        <div class="col-4 col-sm-4">
                               <div class="form-group">
                                 <label>Servicios</label>
                                 <div class="select2-purple">
@@ -551,7 +565,25 @@ $Rol = $_SESSION['ROL'];
                               </div>
                               </div>
                               <!-- /.form-group -->
-                            </div>
+                          </div>
+                          <div class="col-md-3">
+                          <div class="form-group">
+                            <label for="">Tipo de Pago</label>
+                            <select class="js-example-basic-single" id="sel_tipoPago" name="state" style="width:100%; heigth: 40px;"> 
+                            <option value="0">Seleccionar</option>
+                            <option value="1">Debito</option>  
+                            <option value="2">Credito</option> 
+                            <option value="3">Efectivo</option> 
+                            </select><br><br>
+                          </div>
+                      </div>
+                          <div class="col-4 col-sm-4">
+                              <div class="form-group">
+                                <label for="txt_recaudo">Recaudo</label>
+                                <input type="text" class="form-control" id="txt_recaudo">
+                              </div>
+                          </div>
+                          </div>
                         <div class="col-md-13">
                           <div class="form-group">
                             <label for="">Observaciones:</label>
@@ -2716,7 +2748,7 @@ $Rol = $_SESSION['ROL'];
   fechaCuarenta();
   
   fechaCochenta();
-
+  $(document).ready(function(){ 
     //Initialize Select2 Elements
     $('.select2').select2()
 
@@ -2799,7 +2831,9 @@ $Rol = $_SESSION['ROL'];
     $("#sel_exploradora").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
-    
 
+    $('#txt_recaudo').inputmask('$ 999.999.999' ,{ numericInput: true })
+    
+  });
 
 </script>

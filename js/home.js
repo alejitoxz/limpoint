@@ -97,7 +97,7 @@ function contarOrden(){
   var finDate = fecha.substring(18, 38);
 
   $.ajax({
-      url:'../controlador/ordenServicio/controlador_contador_orden.php',
+      url:'../controlador/home/controlador_contador_orden.php',
       type:'post',
       data:{
         inicioDate:inicioDate,

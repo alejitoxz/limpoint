@@ -556,7 +556,7 @@ session_start();
             $exploradora,$observaciones2,$numero1,$numero2,$numero3,$numero4,
             $numero5,$numero6,$numero7,$numero8,$numero9,$numero10,
             $numero11,$numero12,$numero13,$numero14,$numero15,$numero16,
-            $numero17,$numero18,$numero19,$observaciones3,$servicio1,$observaciones4){
+            $numero17,$numero18,$numero19,$observaciones3,$servicio1,$observaciones4,$recaudon,$tipoPago,$tipoLavado){
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
             $date=@date('Y-m-d H:i:s');
@@ -611,6 +611,9 @@ session_start();
                             numero18,
                             numero19,
                             Observaciones3,
+                            recaudo,
+                            tipoPago,
+                            tipoLavado,
                             observaciones4,
                             estatus,
                             idCompany,
@@ -666,13 +669,16 @@ session_start();
                     $numero18,
                     $numero19,
                     '$observaciones3',
+                    '$recaudon',
+                    $tipoPago,
+                    $tipoLavado,
                     '$observaciones4',
                     1,
                     $idCompany,
                     $idUsuario,
                     0
                 )
-                ";
+                ";echo $sql;exit;
             
             $resp = sqlsrv_query($conn, $sql);
             //consulta para tener el ultimo id de servicio
@@ -729,41 +735,6 @@ session_start();
 
             $sql  = "SELECT COUNT(id) as contadorConductor from conductor
             where estatus = 1 ";
-           //echo $sql;
-            $resp = sqlsrv_query($conn, $sql);
-            if( $resp === false) {
-                return 0;
-            }
-            $i = 0;
-            
-            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
-            {
-                $data[$i] = $row;
-                $i++;
-            }
-            if($data>0){
-                return $data;
-            }else{
-                return 0;
-            }
-            
-            $this->conexion->conectar();
-        }
-
-        function contador_orden($inicioDate,$finDate){
-            $conn = $this->conexion->conectar();
-            $idCompany = $_SESSION['COMPANY'];
-            $Rol = $_SESSION['ROL'];
-            $idUsuario = $_SESSION['S_ID'];
-
-
-            $sql  = "SELECT COUNT
-            ( s.id ) AS contadorServicio 
-            FROM
-            servicio AS s
-            INNER JOIN ordenServicio AS os ON ( os.idServicio = s.Id ) 
-            where os.estatus = 1 and fecha_creacion between '$inicioDate' and '$finDate'
-           ";
            //echo $sql;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {

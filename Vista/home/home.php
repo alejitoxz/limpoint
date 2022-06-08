@@ -7,59 +7,146 @@ if ($Rol == 1 || $Rol == 2) {
 <div class="col-md-12">
     <div class="card">
         <div class="card-body">
-          
-        <div class="row">
-          
-        <label style="margin-left:8px; margin-top:5px;" for="">Fecha inicial:</label>
-        <input type="text" class="form-control" id="fecIni" style="margin-left:8px; width:26%; heigth: 40px; text-align:center;" >
-        <button type="button" class="btn btn-primary" onclick="graficaTecnico();graficaBateria();graficaOrdenes();graficaAceite();contarOrden()" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
-        </div>
         <br>
             <div class="row">
 
-                <div class="col-lg-4 col-6">
-                <div class="small-box bg-warning">
+                <div class="col-lg-3 col-3">
+                <div class="small-box" style="background-color:#E34949; color:#FFFFFF;">
                     <div class="inner">
-                    <h3 id="contadorServicio">0</h3>
-
-                    <p>Servicios</p>
+                    <h3 id="contadorRecaudoTotal" style="color:white;">0</h3>
+                    <p>Total Recaudado</p>
                     </div>
                     <div class="icon">
                     <i class="fas fa-list"></i>
                     </div>
-                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer">Servicios registrados en el dia
+                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Total recaudo
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+                </div>
+                
+                <div class="col-lg-3 col-3">
+                <div class="small-box" style="background-color:#48E843; color:#FFFFFF;">
+                    <div class="inner">
+                    <h3 id="contadorServicioTotal">0</h3>
+                    <p>Total Servicios</p>
+                    </div>
+                    <div class="icon">
+                    <i class="fas fa-list"></i>
+                    </div>
+                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Total Servicios registrados
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
                 </div>
 
-                <div class="col-lg-4 col-6">
-                    <div class="small-box bg-info">
+                <div class="col-lg-3 col-3">
+                    <div class="small-box"style="background-color:#0800FF; color:#FFFFFF;">
                         <div class="inner">
                         <h3 id="contadorVehiculo">0</h3>
-
-                        <p>Vehículos</p>
+                        <p>Total Vehículos</p>
                         </div>
                         <div class="icon">
                         <i class="fas fa-taxi"></i>
                         </div>
-                        <a onclick="cargar_contenido('contenido_principal','vehiculo/vista_vehiculo_listar.php')" class="small-box-footer">Total de vehículos  registrados 
+                        <a onclick="cargar_contenido('contenido_principal','vehiculo/vista_vehiculo_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Total de vehículos  registrados 
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-6">
+                <div class="col-lg-3 col-3">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box" style="background-color:#4AD5E8; color:#FFFFFF;">
                     <div class="inner">
                     <h3 id="contadorPropietario">0</h3>
-                        <p>Clientes</p>
+                        <p>Total Clientes</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                        <a onclick="cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php')" class="small-box-footer">Total de clientes registrados 
+                        <a onclick="cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Total de clientes registrados 
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+          
+              
+
+            </div>
+        </div>
+    </div>
+</div> 
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+          
+        <div class="row">
+          
+        <label style="margin-left:8px; margin-top:5px;" for="">Seleccionar fechas:</label>
+        <input type="text" class="form-control" id="fecIni" style="margin-left:8px; width:26%; heigth: 40px; text-align:center;" >
+        <button type="button" class="btn btn-primary" onclick="contarOrden()" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
+        </div>
+        <br>
+            <div class="row">
+
+                <div class="col-lg-3 col-3">
+                <div class="small-box" style="background-color:#E34949; color:#FFFFFF;">
+                    <div class="inner">
+                    <h3 id="contadorRecaudo">0</h3>
+                    <p>Recaudo diario</p>
+                    </div>
+                    <div class="icon">
+                    <i class="fas fa-list"></i>
+                    </div>
+                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Recaudo diario
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+                </div>
+
+                <div class="col-lg-3 col-3">
+                <div class="small-box"style="background-color:#48E843; color:#FFFFFF;">
+                    <div class="inner">
+                    <h3 id="contadorServicio">0</h3>
+                    <p>Servicios diarios</p>
+                    </div>
+                    <div class="icon">
+                    <i class="fas fa-list"></i>
+                    </div>
+                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Servicios registrados en el dia
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+                </div>
+
+                <div class="col-lg-3 col-3">
+                    <div class="small-box" style="background-color:#0800FF; color:#FFFFFF;">
+                        <div class="inner">
+                        <h3 id="contadorVehiculo">0</h3>
+                        <p>Vehículos diarios</p>
+                        </div>
+                        <div class="icon">
+                        <i class="fas fa-taxi"></i>
+                        </div>
+                        <a onclick="cargar_contenido('contenido_principal','vehiculo/vista_vehiculo_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Vehiculos registrados en el dia
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-3">
+                    <!-- small box -->
+                    <div class="small-box" style="background-color:#4AD5E8; color:#FFFFFF;">
+                    <div class="inner">
+                    <h3 id="contadorPropietario">0</h3>
+                        <p>Clientes diarios</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                        <a onclick="cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php')" class="small-box-footer">Clientes registrados en el dia
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>

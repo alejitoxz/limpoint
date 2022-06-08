@@ -53,6 +53,10 @@
 
     $servicio1 = $_POST['servicio1'];
     $observaciones4 = htmlspecialchars($_POST['observaciones4'],ENT_QUOTES,'UTF-8');
+    $recaudon = htmlspecialchars($_POST['recaudon'],ENT_QUOTES,'UTF-8');
+    $tipoPago = htmlspecialchars($_POST['tipoPago'],ENT_QUOTES,'UTF-8');
+    $tipoLavado = htmlspecialchars($_POST['tipoLavado'],ENT_QUOTES,'UTF-8');
+    
     
     $consulta = $MU->registrar_ordenServicio(
     $placa,$fIngreso,$tecnico,$observaciones1,$reloj,$radio,
@@ -62,6 +66,6 @@
     $exploradora,$observaciones2,$numero1,$numero2,$numero3,$numero4,
     $numero5,$numero6,$numero7,$numero8,$numero9,$numero10,
     $numero11,$numero12,$numero13,$numero14,$numero15,$numero16,
-    $numero17,$numero18,$numero19,$observaciones3,$servicio1,$observaciones4
+    $numero17,$numero18,$numero19,$observaciones3,$servicio1,$observaciones4,$recaudon,$tipoPago,$tipoLavado
     );
     echo $consulta;

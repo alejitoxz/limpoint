@@ -370,6 +370,29 @@ function listar_filtro_combustible(){
     })
 }
 
+// funcion para convertir una cdaena de texto a entero, y solo mostrar numeros
+function getNumbersInString(string) {
+    var tmp = string.split("");
+    var map = tmp.map(function(current) {
+      if (!isNaN(parseInt(current))) {
+        return current;
+      }
+    });
+  
+    var numbers = map.filter(function(value) {
+      return value != undefined;
+    });
+  
+    return numbers.join("");
+}
+
+const formatterPeso  = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+})
+//var valor = formatterPeso.format(recaudon); 
+
 function registrar_Servicio(){
     var placa = $("#sel_placa").val();
     var fIngreso = $("#txt_fIngreso").val();
@@ -421,6 +444,12 @@ function registrar_Servicio(){
     var observaciones3 = $("#txt_observaciones3").val();
     var servicio1 = $("#sel_servicio1").val();
     var observaciones4 = $("#txt_observaciones4").val();
+    var tipoPago = $("#sel_tipoPago").val();
+    var tipoLavado = $("#sel_tipoLavado").val();
+    
+    //obtenemos y validamos recaudo
+    var recaudo = $("#txt_recaudo").val();   
+    var recaudon = getNumbersInString(recaudo);
     
     if (tapete == "on") {
         tapete = 1;
@@ -581,7 +610,10 @@ function registrar_Servicio(){
         numero19:numero19,
         observaciones3:observaciones3,
         servicio1:servicio1,
-        observaciones4:observaciones4
+        observaciones4:observaciones4,
+        recaudon:recaudon,
+        tipoPago:tipoPago,
+        tipoLavado:tipoLavado
         }
     }).done(function(resp){
         
