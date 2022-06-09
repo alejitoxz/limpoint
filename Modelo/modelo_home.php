@@ -272,6 +272,109 @@ session_start();
             
             $this->conexion->conectar();
         }
+        function contador_ordenTotal(){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+
+            $sql  = "SELECT COUNT(s.id) 
+            AS contadorServicioTotal 
+            FROM
+            servicio AS s 
+            WHERE
+            s.estatus = 1 
+           ";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
+
+        function contador_recaudoTotal(){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+
+            $sql  = "SELECT COUNT
+            ( s.id ) as id,
+            sum (CONVERT(int,s.recaudo)) AS contadorRecaudoTotal 
+            FROM
+            servicio AS s 
+            WHERE
+            s.estatus = 1
+           ";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
+
+        function contador_recaudo($inicioDate,$finDate){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+
+            $sql  = "SELECT COUNT
+            ( s.id ) as id,
+            sum (CONVERT(int,s.recaudo)) AS contadorRecaudo 
+            FROM
+            servicio AS s 
+            WHERE
+            s.estatus = 1 AND fIngreso between '$inicioDate' and '$finDate'
+           ";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
 
         function listar_grafico_aceitico($inicioDate,$finDate){
             

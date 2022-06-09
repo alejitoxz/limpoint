@@ -95,7 +95,6 @@ function contarOrden(){
   var fecha = $("#fecIni").val();
   var inicioDate = fecha.substring(0, 16);
   var finDate = fecha.substring(18, 38);
-
   $.ajax({
       url:'../controlador/home/controlador_contador_orden.php',
       type:'post',
@@ -113,6 +112,76 @@ function contarOrden(){
        }
           
           
+  })
+}
+
+function contarOrdenTotal(){
+
+  $("#contadorServicioTotal").html(0);
+
+
+
+  $.ajax({
+      url:'../controlador/home/controlador_contador_ordenTotal.php',
+      type:'post'
+  }).done(function(req){
+  var resultado=eval("("+req+")");
+
+      if(resultado.length>0){
+          $("#contadorServicioTotal").html(resultado[0]['contadorServicioTotal']);
+       }else{
+          $("#contadorServicioTotal").html(0);
+       }
+          
+          
+  })
+}
+
+function contarRecaudoTotal(){
+
+  $("#contadorRecaudoTotal").html(0);
+
+
+
+  $.ajax({
+      url:'../controlador/home/controlador_contador_recaudoTotal.php',
+      type:'post'
+  }).done(function(req){
+  var resultado=eval("("+req+")");
+
+      if(resultado.length>0){
+          $("#contadorRecaudoTotal").html(resultado[0]['contadorRecaudoTotal']);
+       }else{
+          $("#contadorRecaudoTotal").html(0);
+       }
+          
+          
+  })
+}
+
+function contarRecaudo(){
+
+  $("#contadorRecaudo").html(0);
+  var fecha = $("#fecIni").val();
+  var inicioDate = fecha.substring(0, 16);
+  var finDate = fecha.substring(18, 38);
+
+
+  $.ajax({
+      url:'../controlador/home/controlador_contador_recaudo.php',
+      type:'post',
+      data:{
+        inicioDate:inicioDate,
+        finDate:finDate
+      }
+  }).done(function(req){
+  var resultado=eval("("+req+")");
+
+      if(resultado.length>0){
+          $("#contadorRecaudo").html(resultado[0]['contadorRecaudo']);
+       }else{
+          $("#contadorRecaudo").html(0);
+       }  
   })
 }
 
