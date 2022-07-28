@@ -17,18 +17,28 @@ function listar_vehiculo(){
             {
                 "targets": [ 0 ],
                 "visible": false
+            },
+            {
+                "targets": [ 1 ],
+                "visible": false
+            },
+            {
+                "targets": [ 2 ],
+                "visible": false
             }
         ],
         "columns": [
+            { "data": "idAlianza" },
             { "data": "idPropietario" },
+            { "data": "idMarca" },
             { "data": "id" },
             { "data": "placa" },
+            { "data": "marca" },
             { "data": "tipoVehiculo" },
             { "data": "alianza" },
             { "data": "empresa" },
             { "data": "nombre" },
-            {"defaultContent":
-            "<button style='font-size:13px;' type='button' class='eliminarv btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarv btn btn-info'><i class='fa fa-edit'></i></button>"}
+            {"defaultContent":"<button style='font-size:13px;' type='button' class='eliminarv btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarv btn btn-info'><i class='fa fa-edit'></i></button>"}
         ],
         "language":idioma_espanol,
        select: true
@@ -57,7 +67,7 @@ function listar_pro(){
             }
             
             $("#sel_pro_vehiculo").html(cadena);
-            $("#sel_pro_vehiculo_edit").html(cadena);
+            $("#sel_pro_vehiculo_editar").html(cadena);
         }else{
             cadena+="<option value='0'>No se encontraron registros</option>"; 
         }
@@ -79,17 +89,48 @@ function listar_alianza(){
                 cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['alianza']+"</option>";
             }
             $("#sel_alianza").html(cadena);
-            $("#sel_empresa_edit").html(cadena);
+            $("#sel_alianza_editar").html(cadena);
         }else{
             cadena+="<option value =''>No se encontraron registros</option>"; 
         }
     })
 }
+
+function listar_marca(){
+    $.ajax({
+        "url": "../controlador/vehiculo/controlador_marca_listar.php",
+        "type": "POST"
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        
+        var cadena="";
+        if(data.length>0){
+            cadena+="<option value='0'>Seleccionar</option>"; 
+            for(var i=0; i < data.length; i++){
+                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['marca']+"</option>";
+            }
+            $("#sel_marca").html(cadena);
+            $("#sel_marca_editar").html(cadena);
+        }else{
+            cadena+="<option value =''>No se encontraron registros</option>"; 
+        }
+    })
+}
+function limpiarRegistro(){
+    //ingresas datos modal
+    $("#txt_placa").val("");
+    $("#sel_marca").val(0).trigger('change');
+    $("#sel_tipoVehiculo").val(0).trigger('change');
+    $("#sel_alianza").val(0).trigger('change');
+    $("#sel_pro_vehiculo").val(0).trigger('change');
+}
+
 function registrar_vehiculo(){
-    var txt_placa = $("#txt_placa").val();
-    var sel_tipoVehiculo = $("#sel_tipoVehiculo").val();
-    var sel_alianza = $("#sel_alianza").val();
-    var sel_pro_vehiculo = $("#sel_pro_vehiculo").val();
+    var placa = $("#txt_placa").val();
+    var tipoVehiculo = $("#sel_tipoVehiculo").val();
+    var alianza = $("#sel_alianza").val();
+    var pro_vehiculo = $("#sel_pro_vehiculo").val();
+    var marca = $("#sel_marca").val();
 
 
     if(
@@ -102,10 +143,11 @@ function registrar_vehiculo(){
         "url": "../controlador/vehiculo/controlador_vehiculo_registrar.php",
         "type": "POST",
         data:{
-            txt_placa:txt_placa,
-            sel_alianza:sel_alianza,
-            sel_tipoVehiculo:sel_tipoVehiculo,
-            sel_pro_vehiculo:sel_pro_vehiculo
+            placa:placa,
+            alianza:alianza,
+            tipoVehiculo:tipoVehiculo,
+            pro_vehiculo:pro_vehiculo,
+            marca:marca
             
         }
     }).done(function(resp){
@@ -126,13 +168,108 @@ function registrar_vehiculo(){
     })
 
 }
-// FUNCION PARA ELIMINAR (ANULAR) REGISTRO
-$('#tabla_vehiculo').on('click','.eliminarv',function(){
-    if(table.row(this).child.isShown()){
-        var idVehiculo = table.row(this).data().id;
+function contarVehiculo(){
+    $("#contadorVehiculo").html(0);
+    $.ajax({
+        url:'../controlador/vehiculo/controlador_contador_vehiculo.php',
+        type:'post',
+    }).done(function(req){
+		var resultado=eval("("+req+")");
+        if(resultado.length>0){
+            $("#contadorVehiculo").html(resultado[0]['contadorVehiculo']);
+         }else{
+            $("#contadorVehiculo").html(0);
+         }
+            
+            
+    })
+}
+
+
+
+function AbrirModalEditarV(){
+    $("#modal_editar_v").modal({backdrop:'static',keyboard:false})
+    $("#modal_editar_v").modal('show');
+}
+
+// FUNCION PARA EDITAR REGISTRO
+$('#tabla_vehiculos').on('click','.editarv',function(){
+    
+    if(tabla_vehiculo.row(this).child.isShown()){
+        var datosVehiculo = tabla_vehiculo.row(this).data();
     }else{
-        var idVehiculo = table.row($(this).parents('tr')).data().id;
+        var datosVehiculo = tabla_vehiculo.row($(this).parents('tr')).data();
     }
+    var idPropietario = datosVehiculo.idPropietario;
+    var id = datosVehiculo.id;
+    var placa = datosVehiculo.placa;
+    var marca = datosVehiculo.idMarca;
+    var tipoVehiculo = datosVehiculo.tipoVehiculo;
+    var alianza = datosVehiculo.idAlianza;
+
+    //levantar modal
+    AbrirModalEditarV();
+    //ingresas datos modal
+    $("#idVehiculo").val(id);
+    $("#txt_placa_editar").val(placa);
+    $("#sel_marca_editar").val(marca).trigger('change');
+    $("#sel_tipoVehiculo_editar").val(tipoVehiculo).trigger('change');
+    $("#sel_alianza_editar").val(alianza).trigger('change');
+    $("#sel_pro_vehiculo_editar").val(idPropietario).trigger('change');
+    
+})
+function modificar_vehiculo(){
+    var placa = $("#txt_placa_editar").val();
+    var marca = $("#sel_marca_editar").val();
+    var tipoVehiculo = $("#sel_tipoVehiculo_editar").val();
+    var alianza = $("#sel_alianza_editar").val();
+    var idPropietario = $("#sel_pro_vehiculo_editar").val();
+    var id = $("#idVehiculo").val();
+    
+
+    if(
+        txt_placa == ''
+    ){
+        return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+    }
+        
+
+    $.ajax({
+        "url": "../controlador/vehiculo/controlador_vehiculo_modificar.php",
+        "type": "POST",
+        data:{
+        id:id,
+        placa:placa,
+        marca:marca,
+        tipoVehiculo:tipoVehiculo,
+        alianza:alianza,
+        idPropietario:idPropietario
+        }
+    }).done(function(resp){
+        console.log(resp);
+        if(resp > 0){
+            $("#modal_editar_v").modal('hide');
+            Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
+                .then((value)=>{
+                    tabla_vehiculo.ajax.reload();
+            });
+        
+        }else{
+            Swal.fire("Mensaje De Error",'No se pudo completar la edicion', "error");
+        }
+    })
+
+}
+
+// FUNCION PARA ELIMINAR (ANULAR) REGISTRO
+$('#tabla_vehiculos').on('click','.eliminarv',function(){
+    
+    if(table.row(this).child.isShown()){
+        var idVehiculo = tabla_vehiculo.row(this).data().id;
+    }else{
+        var idVehiculo = tabla_vehiculo.row($(this).parents('tr')).data().id;
+    }
+    console.log("entra",idVehiculo)
     Swal.fire({
         title: '¿Seguro desea eliminar el registro?',
         text: "Una vez hecho esto, se eliminara del sistema",
@@ -175,171 +312,7 @@ function modificar_estatusV(id,estatus){
     })
 }
 
-function AbrirModalEditarV(){
-    $("#modal_editar_v").modal({backdrop:'static',keyboard:false})
-    $("#modal_editar_v").modal('show');
-    
-}
-
-// FUNCION PARA EDITAR REGISTRO
-$('#tabla_vehiculos').on('click','.editarv',function(){
-
-    if(tabla_vehiculo.row(this).child.isShown()){
-        var datosVehiculo = tabla_vehiculo.row(this).data();
-    }else{
-        var datosVehiculo = tabla_vehiculo.row($(this).parents('tr')).data();
-    }
-    console.log("datos",datosVehiculo)
-    var idPropietario = datosVehiculo.idPropietario;
-    var idEmpresa = datosVehiculo.idEmpresa;
-    var id = datosVehiculo.id;
-    var cod_interno = datosVehiculo.cod_interno;
-    var placa = datosVehiculo.placa;
-    var marca = datosVehiculo.marca;
-    var modelo = datosVehiculo.modelo;
-    var chasis = datosVehiculo.chasis;
-    var num_pasajero = datosVehiculo.num_pasajero;
-    var soat = datosVehiculo.soat;
-    var pContractual = datosVehiculo.pContractual;
-    var pExtraContractual = datosVehiculo.pExtraContractual;
-    var tecnomecanica = datosVehiculo.tecnomecanica;
-    var vSoat = datosVehiculo.vSoat;
-    var vContractual = datosVehiculo.vContractual;
-    var vExtraContractual = datosVehiculo.vExtraContractual;
-    var vTecnomecanica = datosVehiculo.vTecnomecanica;
-
-    //levantar modal
-    AbrirModalEditarV();
-    $("#idVehiculo").val(id);
-    //ingresas datos modal
-    $("#txt_interno_edit").val(cod_interno);
-    $("#txt_placa_edit").val(placa);
-    $("#txt_marca_edit").val(marca);
-    $("#txt_modelo_edit").val(modelo);
-
-    $("#txt_chasis_edit").val(chasis);
-    $("#txt_pasajeros_edit").val(num_pasajero);
-    $("#sel_empresa_edit").val(idEmpresa).trigger('change');
-    $("#sel_pro_vehiculo_edit").val(idPropietario).trigger('change');
-
-    $("#txt_soat_edit").val(soat);
-    $("#txt_tecnomecanica_edit").val(tecnomecanica);
-    $("#txt_poliza_cont_edit").val(pContractual);
-    $("#txt_poliza_ext_edit").val(pExtraContractual);
-
-    $("#venc_soat_edit").val(vSoat);
-    $("#venc_tecno_edit").val(vTecnomecanica);
-    $("#venc_poliza_cont_edit").val(vContractual);
-    $("#venc_poliza_ext_edit").val(vExtraContractual);
-
-})
-function modificar_vehiculo(){
-    var txt_interno = $("#txt_interno_edit").val();
-    var txt_placa = $("#txt_placa_edit").val();
-    var txt_marca = $("#txt_marca_edit").val();
-    var txt_modelo = $("#txt_modelo_edit").val();
-
-    var txt_chasis = $("#txt_chasis_edit").val();
-    var txt_pasajeros = $("#txt_pasajeros_edit").val();
-    var sel_empresa = $("#sel_empresa_edit").val();
-    var sel_pro_vehiculo = $("#sel_pro_vehiculo_edit").val();
-
-    var txt_soat = $("#txt_soat_edit").val();
-    var txt_tecnomecanica = $("#txt_tecnomecanica_edit").val();
-    var txt_poliza_cont = $("#txt_poliza_cont_edit").val();
-    var txt_poliza_ext = $("#txt_poliza_ext_edit").val();
-
-    var venc_soat = $("#venc_soat_edit").val();
-    var venc_tecno = $("#venc_tecno_edit").val();
-    var venc_poliza_cont = $("#venc_poliza_cont_edit").val();
-    var venc_poliza_ext = $("#venc_poliza_ext_edit").val();
-
-    var id = $("#idVehiculo").val();
-
-
-    if( txt_interno == '' ||
-        txt_placa == ''
-    ){
-        return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
-    }
-        
-
-    $.ajax({
-        "url": "../controlador/vehiculo/controlador_vehiculo_modificar.php",
-        "type": "POST",
-        data:{
-        id:id,
-        txt_interno:txt_interno,
-        txt_placa:txt_placa,
-        txt_marca:txt_marca,
-        txt_modelo:txt_modelo,
-        txt_chasis:txt_chasis,
-        txt_pasajeros:txt_pasajeros,
-        sel_empresa:sel_empresa,
-        sel_pro_vehiculo:sel_pro_vehiculo,
-        txt_soat:txt_soat,
-        txt_tecnomecanica:txt_tecnomecanica,
-        txt_poliza_cont:txt_poliza_cont,
-        txt_poliza_ext:txt_poliza_ext,
-        venc_soat:venc_soat,
-        venc_tecno:venc_tecno,
-        venc_poliza_cont:venc_poliza_cont,
-        venc_poliza_ext:venc_poliza_ext
-        }
-    }).done(function(resp){
-        console.log(resp);
-        if(resp > 0){
-            $("#modal_editar_v").modal('hide');
-            Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
-                .then((value)=>{
-                    tabla_vehiculo.ajax.reload();
-            });
-        
-        }else{
-            Swal.fire("Mensaje De Error",'No se pudo completar la edicion', "error");
-        }
-    })
-
-}
-
-function contarVehiculo(){
-    $("#contadorVehiculo").html(0);
-    $.ajax({
-        url:'../controlador/vehiculo/controlador_contador_vehiculo.php',
-        type:'post',
-    }).done(function(req){
-		var resultado=eval("("+req+")");
-        if(resultado.length>0){
-            $("#contadorVehiculo").html(resultado[0]['contadorVehiculo']);
-         }else{
-            $("#contadorVehiculo").html(0);
-         }
-            
-            
-    })
-}
-
-function limpiarRegistro(){
-    $("#idVehiculo").val("");
-    //ingresas datos modal
-    $("#txt_interno").val("");
-    $("#txt_placa").val("");
-    $("#txt_marca").val("");
-    $("#txt_modelo").val("");
-
-    $("#txt_chasis").val("");
-    $("#txt_pasajeros").val("");
-    $("#sel_empresa").val(0).trigger('change');
-    $("#sel_pro_vehiculo").val(0).trigger('change');
-
-    $("#txt_soat").val("");
-    $("#txt_tecnomecanica").val("");
-    $("#txt_poliza_cont").val("");
-    $("#txt_poliza_ext").val("");
-
-    $("#venc_soat").val("");
-    $("#venc_tecno").val("");
-    $("#venc_poliza_cont").val("");
-    $("#venc_poliza_ext").val("");
-    
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+    //e.value = e.value.toLowerCase(); minuscula
 }

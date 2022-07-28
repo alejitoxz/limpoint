@@ -282,6 +282,7 @@ if(isset($Datos[$i]['submodulos'])){
 			}
 	 }
    cargar_contenido('contenido_principal','home/home.php');
+   
   function cargar_contenido(contenedor,contenido){
     $("#"+contenedor).load(contenido);
   }

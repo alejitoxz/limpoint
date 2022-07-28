@@ -65,13 +65,13 @@
             <div class="form-group">
               <label for="">Nombres</label>
               <input type="hidden" id="idPersonaR">
-              <input type="text" class="form-control" id="txt_nom" placeholder="Ingrese los nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nom" placeholder="Ingrese los nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape" placeholder="Ingrese los apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_ape" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -89,7 +89,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" id="txt_usu" placeholder="Ingrese el usuario"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_usu" placeholder="Ingrese el usuario"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -145,13 +145,13 @@
           <input type="hidden" id="idPersona" >
             <div class="form-group">
               <label for="">Nombres</label>
-              <input type="text" class="form-control" id="txt_nom_edit" placeholder="Ingrese los Nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nom_edit" placeholder="Ingrese los Nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape_edit" placeholder="Ingrese los apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_ape_edit" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -171,7 +171,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" id="txt_usu_edit" placeholder="Ingrese el usuario"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_usu_edit" placeholder="Ingrese el usuario"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -209,6 +209,14 @@
 <script type="text/javascript" src="../js/usuario.js"></script>
 
 <script>
+
+  $('#txt_tel').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+  });
+  $('#txt_tel_edit').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+  });
+
   $(document).ready(function(){
     listar_usuario();
     $('.js-example-basic-single').select2();

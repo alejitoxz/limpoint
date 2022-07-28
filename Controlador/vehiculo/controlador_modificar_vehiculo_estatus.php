@@ -6,3 +6,4 @@
     $estatus = htmlspecialchars($_POST['estatus'],ENT_QUOTES,'UTF-8');
     $consulta = $MU->modificar_vehiculo($id,$estatus);
     echo $consulta;
+    

@@ -22,7 +22,7 @@ $Rol = $_SESSION['ROL'];
                     
                     <div class="row">
                     <button type="button" class="btn btn-primary"  onclick="AbrirModalRegistroServicio()"><i class="fas fa-plus"> </i> Registrar</button>
-                    <button type="button" class="btn btn-primary" style="margin-left:2px;" onclick="exportarReporte()"><i class="fas fa-file-pdf"> </i> Reporte</button>
+                    <!-- /.card-header <button type="button" class="btn btn-primary" style="margin-left:2px;" onclick="exportarReporte()"><i class="fas fa-file-pdf"> </i> Reporte</button>-->
                     </div>
                   
                 </div>
@@ -38,6 +38,7 @@ $Rol = $_SESSION['ROL'];
                       <th>Técnico</th>
                       <th>Fecha de recepcion</th>
                       <th>Usuario</th>
+                      <th>Recaudo</th>
                       <th>Observación</th>
                       <th>Acciones</th>
                     </tr>
@@ -120,14 +121,14 @@ $Rol = $_SESSION['ROL'];
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">Placa</label>
-                          <select class="js-example-basic-single"  name="state" id="sel_placa" style="width:100%; heigth: 40px;" onchange="odometro(this.value)">    
+                          <select class="js-example-basic-single"  name="state" id="sel_placa" style="width:100%; heigth: 40px;" >    
                           </select><br><br>
                         </div>
                       </div>
                       <div class="col-md-4">
                           <div class="form-group">
                             <label for="">Fecha de ingreso</label>
-                            <input  disabled type="date" class="form-control" id="txt_fIngreso" style="width:100%; heigth: 40px; text-align:center;" value="<?php echo date("Y-m-d");?>"><br>
+                            <input  type="date" class="form-control" id="txt_fIngreso" style="width:100%; heigth: 40px; text-align:center;" value="<?php echo date("Y-m-d");?>"><br>
                           </div>
                         </div>
                       <div class="col-md-4">
@@ -600,6 +601,7 @@ $Rol = $_SESSION['ROL'];
                   <div style="margin-left:35%;">
                   <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cancelar</button>
                   <button type="submit" class="btn btn-primary" onclick="registrar_Servicio()">Guardar</button>
+                  <!-- /.card-body <button type="submit" class="btn btn-success" onclick="cerrar_modal();crear_cliente();" >Crear cliente</button>-->
                   </div>
                 </div>
               </div>
@@ -696,7 +698,7 @@ $Rol = $_SESSION['ROL'];
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">Placa</label>
-                          <select class="js-example-basic-single"  name="state" id="sel_editar_placa_vehiculo" style="width:100%; heigth: 40px;" onchange="odometro(this.value)">    
+                          <select class="js-example-basic-single"  name="state" id="sel_editar_placa_vehiculo" style="width:100%; heigth: 40px;" >    
                           </select><br><br>
                         </div>
                       </div>
@@ -2140,7 +2142,7 @@ $Rol = $_SESSION['ROL'];
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">Placa</label>
-                          <select class="js-example-basic-single"  name="state" id="sel_placa_ver" style="width:100%; heigth: 40px;" onchange="odometro(this.value)">    
+                          <select class="js-example-basic-single"  name="state" id="sel_placa_ver" style="width:100%; heigth: 40px;">    
                           </select><br><br>
                         </div>
                       </div>

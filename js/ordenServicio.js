@@ -55,15 +55,16 @@ function listar_orden(){
             },
             { "data": "fIngreso" },
             { "data": "usuario" },
+            { "data": "recaudo" },
             { "data": "observaciones" },
             
             {
                 render: function(data, type, row){
                     if(rol == 1){
-                        return "<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editar btn btn-info'><i class='fa fa-edit'></i></button><button style='font-size:13px;' type='button' class='ver btn btn-primary'><i class='fa fa-eye'></i></button><button style='font-size:13px;' type='button' class='enviarCorreo btn btn-success'><i class='fa fa-envelope'></i></button>"
-                    }else if(rol == 2){
-                        return "<button style='font-size:13px;' type='button' class='ver btn btn-primary'><i class='fa fa-eye'></i></button>"
-                    }
+                        return "<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button>"
+                    }else{
+                        return "<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button>"
+                    } 
                 }
             }
         ],
@@ -72,13 +73,24 @@ function listar_orden(){
     } );
     
 }
+//funcion para crear cliente
+function crear_cliente(){
+    $(".modal-backdrop").hide();
+    cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php');
 
+  $('.nav-active').removeClass("active");
+  //$(this).addClass("active");
+
+}
 // FUNCION PARA EXPORTAR REPORTE
 function exportarReporte(){
     var url = "../controlador/ordenServicio/controlador_exportar_reporte.php"
     window.open(url,'_blank');
 }
+function cerrar_modal(){
+    $("#modal_registro_Servicio").modal('hide');
 
+}
 function AbrirModalRegistroServicio(){
     $("#modal_registro_Servicio").modal({backdrop:'static',keyboard:false})
     $("#modal_registro_Servicio").modal('show');
@@ -633,7 +645,64 @@ function registrar_Servicio(){
     })
 
 }
+function limpiarRegistro(){
 
+
+    $("#sel_placa").val(0).trigger('change');
+    $("#txt_fIngreso").val("");
+    $("#sel_tecnico").val(0).trigger('change');
+    $("#sel_tipoLavado").val(0).trigger('change');
+    $("#txt_observaciones1").val("");
+    $("#sel_reloj").val(0).trigger('change');
+    $("#sel_radio").val(0).trigger('change');
+    $("#sel_cd").val(0).trigger('change');
+    $("#sel_gato").val(0).trigger('change');
+    $("#sel_encendedor").val(0).trigger('change');
+    $("#sel_cenicero").val(0).trigger('change');
+    $("#sel_forro").val(0).trigger('change');
+    $("#sel_herramienta").val(0).trigger('change');
+    $("#sel_rueda").val(0).trigger('change');
+    $("#sel_tapete").val(0).trigger('change');
+    $("#sel_cuchilla").val(0).trigger('change');
+    $("#sel_llavero").val(0).trigger('change');
+    $("#sel_tercerStop").val(0).trigger('change');
+    $("#sel_emblema").val(0).trigger('change');
+    $("#sel_parasol").val(0).trigger('change');
+    $("#sel_manija").val(0).trigger('change');
+    $("#sel_cinturon").val(0).trigger('change');
+    $("#sel_copa").val(0).trigger('change');
+    $("#sel_espejo").val(0).trigger('change');
+    $("#sel_antena").val(0).trigger('change');
+    $("#sel_exploradora").val(0).trigger('change');
+    $("#observaciones2").val("");
+    $("#sel_1").val(0).trigger('change');
+    $("#sel_2").val(0).trigger('change');
+    $("#sel_3").val(0).trigger('change');
+    $("#sel_4").val(0).trigger('change');
+
+    $("#sel_5").val(0).trigger('change');
+    $("#sel_6").val(0).trigger('change');
+    $("#sel_7").val(0).trigger('change');
+    $("#sel_8").val(0).trigger('change');
+    $("#sel_9").val(0).trigger('change');
+    $("#sel_10").val(0).trigger('change');
+    $("#sel_11").val(0).trigger('change');
+    $("#sel_12").val(0).trigger('change');
+    $("#sel_13").val(0).trigger('change');
+
+    $("#sel_14").val(0).trigger('change');
+    $("#sel_15").val(0).trigger('change');
+    $("#sel_16").val(0).trigger('change');
+    $("#sel_17").val(0).trigger('change');
+    $("#sel_18").val(0).trigger('change');
+    $("#sel_19").val(0).trigger('change');
+    $("#txt_observaciones3").val(0);
+    $("#sel_servicio1").val(0).trigger('change');
+    $("#sel_tipoPago").val(0).trigger('change');
+
+    $("#txt_recaudo").val("");
+    $("#txt_observaciones4").val("");
+}
 $('#tabla_orden').on('click','.editar',function(){
 
     if(table.row(this).child.isShown()){
@@ -1332,72 +1401,14 @@ function fechaCochenta(dias,id){
     var fec = [anio, mes, dia].join('-');
     $("#"+id).val(fec);
 }
-function limpiarRegistro(){
 
-
-    $("#sel_placa").val(0);
-    $("#sel_tecnico").val(0);
-    $("#txt_observaciones1").val(0);
-    $("#sel_reloj").val(0);
-    $("#sel_radio").val(0);
-    $("#sel_cd").val(0);
-    $("#sel_gato").val(0);
-    $("#sel_encendedor").val(0);
-    $("#sel_cenicero").val(0);
-    $("#sel_forro").val(0);
-    $("#sel_herramienta").val(0);
-    $("#sel_rueda").val(0);
-    $("#sel_tapete").val(0);
-    $("#sel_cuchilla").val(0);
-    $("#sel_llavero").val(0);
-    $("#sel_tercerStop").val(0);
-    $("#sel_emblema").val(0);
-    $("#sel_parasol").val(0);
-    $("#sel_manija").val(0);
-    $("#sel_cinturon").val(0);
-    $("#sel_copa").val(0);
-    $("#sel_espejo").val(0);
-    $("#sel_antena").val(0);
-    $("#sel_exploradora").val(0);
-    $("#observaciones2").val("");
-    $("#sel_1").val(0);
-    $("#sel_2").val(0);
-    $("#sel_3").val(0);
-    $("#sel_4").val(0);
-    $("#sel_5").val(0);
-    $("#sel_6").val(0);
-
-    $("#sel_7").val(0);
-    $("#sel_8").val(0);
-    $("#sel_9").val(0);
-    $("#sel_10").val(0);
-    $("#sel_11").val(0);
-    $("#sel_12").val(0);
-    $("#sel_13").val(0);
-    $("#sel_14").val(0);
-    $("#sel_15").val(0);
-
-    $("#sel_16").val(0);
-    $("#sel_17").val(0);
-    $("#sel_18").val(0);
-    $("#sel_19").val(0);
-    $("#txt_observaciones3").val(0);
-    $("#sel_servicio1").val(0);
-    $("#sel_servicio2").val(0);
-    $("#sel_servicio3").val(0);
-    $("#sel_servicio4").val(0);
-
-    $("#sel_servicio5").val(0);
-    $("#sel_servicio6").val(0);
-    $("#txt_observaciones4").val("");
-}
 
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_orden').on('click','.eliminar',function(){
     if(table.row(this).child.isShown()){
-        var idOrdenServicio = table.row(this).data().idOrdenServicio;
+        var id = table.row(this).data().id;
     }else{
-        var idOrdenServicio = table.row($(this).parents('tr')).data().idOrdenServicio;
+        var id = table.row($(this).parents('tr')).data().id;
     }
     Swal.fire({
         title: '¿Seguro desea eliminar el registro?',
@@ -1411,7 +1422,7 @@ $('#tabla_orden').on('click','.eliminar',function(){
       }).then((result) => {
           console.log(result);
         if (result.value) {
-        modificar_estatus(idOrdenServicio,0);
+        modificar_estatus(id,0);
           Swal.fire(
             'Eliminado',
             '¡Tu registro ha sido eliminado!',

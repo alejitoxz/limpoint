@@ -1,10 +1,15 @@
-const colorArray = [
+/*const colorArray = [
 		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
 		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
 		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
 		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];*/
       var table;
+      const formatterPesoHome  = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+    })
 function listar_home(){
     table = $('#tabla_alerta').DataTable( {
         "ordering":true,
@@ -34,7 +39,7 @@ function listar_home(){
     
 }
 
-// FUNCION PARA EDITAR REGISTRO
+/* FUNCION PARA EDITAR REGISTRO
 $('#tabla_alerta').on('click','.enviarCorreo',function(){
 
     if(table.row(this).child.isShown()){
@@ -87,7 +92,7 @@ function reporte(){
     var url = "../controlador/home/controlador_exportar_reporte.php"
     window.open(url,'_blank');
 }
-
+*/
 function contarOrden(){
 
   $("#contadorServicio").html(0);
@@ -114,12 +119,63 @@ function contarOrden(){
           
   })
 }
+function contarVehiculoUnit(){
+
+  $("#contadorServicio").html(0);
+
+  var fecha = $("#fecIni").val();
+  var inicioDate = fecha.substring(0, 16);
+  var finDate = fecha.substring(18, 38);
+  $.ajax({
+      url:'../controlador/home/controlador_contador_vehiculoUnit.php',
+      type:'post',
+      data:{
+        inicioDate:inicioDate,
+        finDate:finDate
+        }
+  }).done(function(req){
+  var resultado=eval("("+req+")");
+
+      if(resultado.length>0){
+          $("#contadorServicio").html(resultado[0]['contadorVehiculo']);
+       }else{
+          $("#contadorServicio").html(0);
+       }
+          
+          
+  })
+}
+function contarcliente(){
+
+  $("#contadorServicio").html(0);
+
+  var fecha = $("#fecIni").val();
+  var inicioDate = fecha.substring(0, 16);
+  var finDate = fecha.substring(18, 38);
+  $.ajax({
+      url:'../controlador/home/controlador_contador_orden.php',
+      type:'post',
+      data:{
+        inicioDate:inicioDate,
+        finDate:finDate
+        }
+  }).done(function(req){
+  var resultado=eval("("+req+")");
+
+      if(resultado.length>0){
+          $("#contadorServicio").html(resultado[0]['contadorServicio']);
+       }else{
+          $("#contadorServicio").html(0);
+       }
+          
+          
+  })
+}
+
 
 function contarOrdenTotal(){
 
   $("#contadorServicioTotal").html(0);
-
-
 
   $.ajax({
       url:'../controlador/home/controlador_contador_ordenTotal.php',
@@ -127,7 +183,7 @@ function contarOrdenTotal(){
   }).done(function(req){
   var resultado=eval("("+req+")");
 
-      if(resultado.length>0){
+  if(resultado.length>0){
           $("#contadorServicioTotal").html(resultado[0]['contadorServicioTotal']);
        }else{
           $("#contadorServicioTotal").html(0);
@@ -150,7 +206,8 @@ function contarRecaudoTotal(){
   var resultado=eval("("+req+")");
 
       if(resultado.length>0){
-          $("#contadorRecaudoTotal").html(resultado[0]['contadorRecaudoTotal']);
+          var valor = formatterPesoHome.format(resultado[0]['contadorRecaudoTotal']);
+          $("#contadorRecaudoTotal").html(valor);
        }else{
           $("#contadorRecaudoTotal").html(0);
        }
@@ -176,16 +233,16 @@ function contarRecaudo(){
       }
   }).done(function(req){
   var resultado=eval("("+req+")");
-
-      if(resultado.length>0){
-          $("#contadorRecaudo").html(resultado[0]['contadorRecaudo']);
+      if(resultado[0]['contadorRecaudo']>0){
+          var valor1 = formatterPesoHome.format(resultado[0]['contadorRecaudo']);
+          $("#contadorRecaudo").html(valor1);
        }else{
           $("#contadorRecaudo").html(0);
        }  
   })
 }
 
-// funcion para charts de ordenbes de servicio por meses
+/* funcion para charts de ordenbes de servicio por meses
 function graficaOrdenes(){
   var fecha = $("#fecIni").val();
   var inicioDate = fecha.substring(0, 16);
@@ -548,7 +605,7 @@ function enviarCorreoA(){
       "url": "../Controlador/home/controlador_home_enviar_vencimientoA.php",
       "type": "POST"
     })
-}
+}*/
 
 const date = new Date();
 const year = date.getFullYear();

@@ -86,13 +86,13 @@ if ($Rol == 1 || $Rol == 2) {
           
         <label style="margin-left:8px; margin-top:5px;" for="">Seleccionar fechas:</label>
         <input type="text" class="form-control" id="fecIni" style="margin-left:8px; width:26%; heigth: 40px; text-align:center;" >
-        <button type="button" class="btn btn-primary" onclick="contarRecaudo();contarOrden();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
+        <button type="button" class="btn btn-primary" onclick="contarRecaudo();contarOrden();contarVehiculoUnit(); contarCliente();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
         </div>
         <br>
             <div class="row">
 
                 <div class="col-lg-3 col-3">
-                <div class="small-box" style="background-color:#E34949; color:#FFFFFF;">
+                  <div class="small-box" style="background-color:#E34949; color:#FFFFFF;">
                     <div class="inner">
                     <h3 id="contadorRecaudo">0</h3>
                     <p>Recaudo diario</p>
@@ -103,7 +103,7 @@ if ($Rol == 1 || $Rol == 2) {
                     <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Recaudo diario
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
-                </div>
+                  </div>
                 </div>
 
                 <div class="col-lg-3 col-3">
@@ -317,12 +317,14 @@ if ($Rol == 1 || $Rol == 2) {
     contarOrdenTotal();
     contarOrden();
     contarVehiculo();
+    contarVehiculoUnit();
+    contarClienteUnit();
     contarPropietario();
-    graficaOrdenes();
-    graficaBateria();
-    graficaAceite();
+    //graficaOrdenes();
+    //graficaBateria();
+    //graficaAceite();
    // graficaLlanta();
-    graficaTecnico();
+    //graficaTecnico();
  // enviarCorreoA();
     //contarConductor();
 </script>

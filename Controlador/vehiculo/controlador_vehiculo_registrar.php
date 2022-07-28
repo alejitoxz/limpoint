@@ -3,12 +3,12 @@
 
     $MU = new modelo_vehiculo();
 
-    $txt_placa= htmlspecialchars($_POST['txt_placa'],ENT_QUOTES,'UTF-8');
-    $sel_tipoVehiculo= htmlspecialchars($_POST['sel_tipoVehiculo'],ENT_QUOTES,'UTF-8');
-    $sel_alianza= htmlspecialchars($_POST['sel_alianza'],ENT_QUOTES,'UTF-8');
-    $sel_pro_vehiculo= htmlspecialchars($_POST['sel_pro_vehiculo'],ENT_QUOTES,'UTF-8');
-
+    $placa= htmlspecialchars($_POST['placa'],ENT_QUOTES,'UTF-8');
+    $tipoVehiculo= htmlspecialchars($_POST['tipoVehiculo'],ENT_QUOTES,'UTF-8');
+    $alianza= htmlspecialchars($_POST['alianza'],ENT_QUOTES,'UTF-8');
+    $pro_vehiculo= htmlspecialchars($_POST['pro_vehiculo'],ENT_QUOTES,'UTF-8');
+    $marca= htmlspecialchars($_POST['marca'],ENT_QUOTES,'UTF-8');
     $consulta = $MU->registrar_vehiculo(
-        $txt_placa,$sel_tipoVehiculo,$sel_alianza,$sel_pro_vehiculo
+        $placa,$tipoVehiculo,$alianza,$pro_vehiculo,$marca
     );
     echo $consulta;

@@ -15,22 +15,37 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
             
+            if ($Rol == 2) {
+                $com = "";
+                $com = "and v.idCompany = $idCompany";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
+            }else{
+                $wr = "";
+                $com = "and v.idCompany = $idCompany";
+            }
+
             $sql  = "SELECT
-            pro.id as idPropietario,
+            pro.id AS idPropietario,
             v.id,
             v.placa,
+            mc.descripcion as marca,
+            mc.id as idMarca,
             v.tipoVehiculo,
-            md.descripcion as alianza,
-            co.entResp as empresa,
-            (p.nombre + ' ' + p.apellido) AS nombre
+            md.descripcion AS alianza,
+            md.id as idAlianza,
+            co.entResp AS empresa,
+            ( p.nombre + ' ' + p.apellido ) AS nombre 
             FROM
             vehiculo AS v
-            left JOIN company AS co ON (co.id = v.idCompany  )
-            left JOIN propietario AS pro ON (v.idPropietario = pro.id)
-            left JOIN persona AS p ON (pro.idPersona = p.id)
-            LEFT JOIN miscelaneos_detalle AS md ON (md.id = v.alianza)
-            WHERE v.estatus = 1 and v.idCompany = $idCompany;
-            ";
+            LEFT JOIN company AS co ON ( co.id = v.idCompany )
+            LEFT JOIN propietario AS pro ON ( v.idPropietario = pro.id )
+            LEFT JOIN persona AS p ON ( pro.idPersona = p.id )
+            LEFT JOIN miscelaneos_detalle AS md ON ( md.id = v.alianza ) 
+            LEFT JOIN miscelaneos_detalle AS mc ON ( mc.id = v.marca )
+            WHERE
+            v.estatus = 1 $com $wr"; 
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -84,6 +99,40 @@ session_start();
             
             $this->conexion->conectar();
         }
+        function listar_marca(){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+
+
+            $sql  = "SELECT 
+            m.id, 
+            m.descripcion as marca
+            from 
+            miscelaneos_detalle as m
+            INNER JOIN miscelaneos AS mi ON ( mi.id = m.id_miscelaneo ) 
+            where m.estatus = 1  AND m.id_miscelaneo = 3";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+			$i = 0;
+            $data = [];
+			while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+			{
+				$data[$i] = $row;
+				$i++;
+			}
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
 
 
     function listar_pro(){
@@ -92,9 +141,9 @@ session_start();
         $Rol = $_SESSION['ROL'];
         $idUsuario = $_SESSION['S_ID'];
 
-        if ($Rol == 1) {
+        if ($Rol == 2) {
             $com = "and pro.idCompany = $idCompany";
-        }else if ($Rol == 2) {
+        }else if ($Rol == 1) {
             $com = "";
             
         }else{ 
@@ -134,16 +183,10 @@ session_start();
 
     
     
-    function registrar_vehiculo($txt_placa,$sel_tipoVehiculo,$sel_alianza,$sel_pro_vehiculo){
+    function registrar_vehiculo($placa,$tipoVehiculo,$alianza,$pro_vehiculo,$marca){
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
         $idUsuario = $_SESSION['S_ID'];
-
-        if($sel_pro_vehiculo != ''){
-            $propietario = $sel_pro_vehiculo;
-        }else{
-            $propietario = 0;
-        }
 
         $sql  = "INSERT INTO vehiculo(
                             placa,
@@ -152,16 +195,18 @@ session_start();
                             estatus,
                             idPropietario,
                             idCompany,
-                            idUsuario
+                            idUsuario,
+                            marca
                             )
                  VALUES(
-                        '$txt_placa',
-                        $sel_tipoVehiculo,
-                        $sel_alianza,
+                        '$placa',
+                        $tipoVehiculo,
+                        $alianza,
                         1,
-                        $sel_pro_vehiculo,
+                        $pro_vehiculo,
                         $idCompany,
-                        $idUsuario
+                        $idUsuario,
+                        $marca
                         )
                  ";
         $resp = sqlsrv_query($conn, $sql);
@@ -193,29 +238,19 @@ session_start();
         $this->conexion->conectar();
     }
 
-    function editar_vehiculo($id,$txt_interno,$txt_placa,$txt_marca,$txt_modelo,$txt_chasis,$txt_pasajeros,$sel_empresa,$sel_pro_vehiculo,$txt_soat,$txt_tecnomecanica,$txt_poliza_cont,$txt_poliza_ext,$venc_soat,$venc_tecno,$venc_poliza_cont,$venc_poliza_ext){
+    function editar_vehiculo($id,$placa,$marca,$tipoVehiculo,$alianza,$idPropietario){
         $conn = $this->conexion->conectar();
 
         $sql  = "UPDATE vehiculo SET
-                cod_interno = '$txt_interno',
-                placa= '$txt_placa', 
-                marca= '$txt_marca',
-                modelo = '$txt_modelo',
-                chasis = '$txt_chasis',
-                num_pasajero = '$txt_pasajeros',
-                soat = '$txt_soat',
-                vSoat = '$venc_soat',
-                tecnomecanica = '$txt_tecnomecanica',
-                vTecnomecanica = '$venc_tecno',
-                pContractual = '$txt_poliza_cont',
-                vContractual = '$venc_poliza_cont',
-                pExtraContractual = '$txt_poliza_ext',
-                vExtraContractual = '$venc_poliza_ext',
-                idEmpresa = $sel_empresa,
-                idPropietario = $sel_pro_vehiculo
+                placa = '$placa',
+                tipoVehiculo= '$tipoVehiculo', 
+                alianza= '$alianza',
+                estatus = 1,
+                idPropietario = '$idPropietario',
+                marca = '$marca'
                 WHERE id=$id
                 ";
-                 //echo $sql;
+                 //echo $sql;exit;
         $resp = sqlsrv_query($conn, $sql);
         
         if( $resp === false) {

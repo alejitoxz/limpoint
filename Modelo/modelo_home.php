@@ -272,6 +272,40 @@ session_start();
             
             $this->conexion->conectar();
         }
+
+        function contador_vehiculoUnit($inicioDate,$finDate){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+
+            $sql  = "SELECT  
+            COUNT(id) as contadorVehiculo 
+            from vehiculo
+            where estatus = 1
+            AND fIngreso between '$inicioDate' and '$finDate'
+           ";
+           echo $sql;exit;
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
         function contador_ordenTotal(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
@@ -355,7 +389,7 @@ session_start();
             servicio AS s 
             WHERE
             s.estatus = 1 AND fIngreso between '$inicioDate' and '$finDate'
-           ";
+            ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -375,7 +409,7 @@ session_start();
             
             $this->conexion->conectar();
         }
-
+/*
         function listar_grafico_aceitico($inicioDate,$finDate){
             
             $conn = $this->conexion->conectar();
@@ -425,7 +459,7 @@ session_start();
 							s.cajaMarca 
 							) AS t
                 ";
-            /*
+            
 select * from (
 	SELECT COUNT
 		( * ) AS cantidad,
@@ -457,7 +491,7 @@ SELECT COUNT
 	GROUP BY
 		md.descripcion
 		) as hol ORDER BY descripcion
-*/
+
             $resp=sqlsrv_query($conn,$sql);
             if( $resp === false ) { echo estadistica; exit; }	
             $i=0;
@@ -546,7 +580,7 @@ SELECT COUNT
             }  
 
             array_push($arrayDatax,$cantidad); 
-            /* if($i==count($asesor2)){*/
+            if($i==count($asesor2)){
             $StatusField = $tecnico[$x]["nombres"];
             
             $arrayData = ["nombres"=>$StatusField,"cantidad"=>$cantidad];
@@ -697,7 +731,7 @@ SELECT COUNT
             
             $this->conexion->conectar();
            
-        }
+        }*/
         
 
         function enviarVencimiento($Propietario,$Placa,$Vencimiento,$Fecha,$Email){

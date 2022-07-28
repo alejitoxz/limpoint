@@ -142,11 +142,13 @@ function registrar_propietario(){
 }
 function limpiarRegistro(){
     $("#idPersonaP").val("");
+    $("#txt_placa").val("");
+    $("#sel_tipoVehiculo").val(0).trigger('change');
+    $("#sel_alianzap").val(0).trigger('change');
     $("#txt_nomp").val("");
     $("#txt_apep").val("");
     $("#txt_telp").val("");
     $("#txt_emap").val("");
-    console.log("prueba");
 }
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_propietario').on('click','.eliminarp',function(){
@@ -286,4 +288,8 @@ function contarPropietario(){
             
             
     })
+}
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+    //e.value = e.value.toLowerCase(); minuscula
 }

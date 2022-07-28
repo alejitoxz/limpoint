@@ -59,7 +59,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa</label>
-              <input type="text" class="form-control" id="txt_placa" placeholder="Ingrese la placa"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_placa" placeholder="Ingrese la placa"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -85,13 +85,13 @@
             <div class="form-group">
               <label for="">Nombres</label>
               <input type="hidden" id="idPersona">
-              <input type="text" class="form-control" id="txt_nomp" placeholder="Ingrese los nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nomp" placeholder="Ingrese los nombres"><br>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_apep" placeholder="Ingrese los apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_apep" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
         </div>
@@ -137,13 +137,13 @@
           <input type="hidden" id="id" >
             <div class="form-group">
               <label for="">Nombres</label>
-              <input type="text" class="form-control" id="txt_nomp_edit" placeholder="Ingrese los Nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nomp_edit" placeholder="Ingrese los Nombres"><br>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_apep_edit" placeholder="Ingrese los apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_apep_edit" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
         </div>
@@ -152,7 +152,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Teléfono</label>
-              <input type="text" class="form-control" id="txt_telp_edit" placeholder="Ingrese el teléfono"><br>
+              <input type="text"  class="form-control" id="txt_telp_edit" placeholder="Ingrese el teléfono"><br>
             </div>
           </div>
           <div class="col-md-6">
@@ -176,6 +176,14 @@
 <script type="text/javascript" src="../js/propietario.js"></script>
 
 <script>
+
+    $('#txt_telp').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
+    $('#txt_telp_edit').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
+
   $(document).ready(function(){
     listar_propietario();
     listar_alianzap();
@@ -187,3 +195,4 @@
     
 
 </script>
+

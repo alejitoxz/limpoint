@@ -22,18 +22,18 @@ session_start();
             $idCompany = $_SESSION['COMPANY'];
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
-            if ($Rol == 3) {
-                $wr = "and s.idUsuario = $idUsuario";
-                $com = "and s.id = $idCompany";
+            if ($Rol == 4) {
+                $wr = "";
+                $com = "and co.id = $idCompany";
             }else if ($Rol == 1 ) {
                 $com = "";
                 $wr = "";
             }else if ( $Rol == 2) {
                 $com = "";
-                $wr = "";
+                $wr = "and co.id = $idCompany";
             }else{ 
                 $wr = "";
-                $com = "and s.id = $idCompany";
+                $com = "and co.id = $idCompany";
             }
 
             $sql = "SELECT 
@@ -45,6 +45,7 @@ session_start();
             s.tecnico,
             CONVERT ( VARCHAR, s.fIngreso ) AS fIngreso,
             ( pe.nombre + ' ' + pe.apellido ) AS usuario,
+            s.recaudo,
             s.observaciones1 as observaciones
             from
             servicio as s
@@ -226,7 +227,7 @@ session_start();
             FROM
             tarifa AS t
             WHERE  
-            t.estatus = 1 AND idCompany = $idCompany";
+            t.estatus = 1 ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -678,7 +679,7 @@ session_start();
                     $idUsuario,
                     0
                 )
-                ";echo $sql;exit;
+                ";//echo $sql;exit;
             
             $resp = sqlsrv_query($conn, $sql);
             //consulta para tener el ultimo id de servicio
@@ -1007,7 +1008,7 @@ session_start();
 
         function modificar_ordenServicio($id,$estatus){
             $conn = $this->conexion->conectar();
-            $sql  = "UPDATE ordenServicio set estatus= $estatus
+            $sql  = "UPDATE servicio set estatus= $estatus
                     WHERE id='$id'
                     ";
             $resp = sqlsrv_query($conn, $sql);
