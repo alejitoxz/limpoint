@@ -86,7 +86,7 @@ if ($Rol == 1 || $Rol == 2) {
           
         <label style="margin-left:8px; margin-top:5px;" for="">Seleccionar fechas:</label>
         <input type="text" class="form-control" id="fecIni" style="margin-left:8px; width:26%; heigth: 40px; text-align:center;" >
-        <button type="button" class="btn btn-primary" onclick="contarRecaudo();contarOrden();contarVehiculoUnit(); contarCliente();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
+        <button type="button" class="btn btn-primary" onclick="contarRecaudo(); contarOrden(); contarVehiculoUnit(); contarCliente(); listar_ordentwo();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
         </div>
         <br>
             <div class="row">
@@ -100,7 +100,7 @@ if ($Rol == 1 || $Rol == 2) {
                     <div class="icon">
                     <i class="fas fa-list"></i>
                     </div>
-                    <a onclick="cargar_contenido('contenido_principal','ordenServicio/vista_ordenServicio_listar.php')" class="small-box-footer" style="color:#FFFFFF;">Recaudo diario
+                    <a onclick="listar_ordenp();" class="small-box-footer" style="color:#FFFFFF;">Recaudo diario
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                   </div>
@@ -298,13 +298,37 @@ if ($Rol == 1 || $Rol == 2) {
     </div>
 </div>
 -->
+<form autocomplete="false" onsubmit="return false">
 
+<div class="modal fade" id="listar_ordenpe" role="dialog">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header modal-primary">
+        <h4 class="modal-title"><b>Ordenes registradas</b></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- FORMULARIO REGISTRO DE vehiculo, CAMPOS -->
+          <table id="tabla_orden" class="display responsive nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                      <th>Placa</th>
+                      <th>Cliente</th>
+                      <th>Fecha de recepcion</th>
+                      <th>Recaudo</th>
+                    </tr>
+                    </thead>
+                    <tbody id="ListadoOrden">
+                    </tbody>
+            </table>
+  </div>
+  </form>
 
 <script src="../js/home.js"></script>
 <script>
   
   $(document).ready(function(){
-    listar_home();
+    listar_ordentwo();
   })
 </script>
 <script src="../js/usuario.js"></script>
@@ -312,6 +336,7 @@ if ($Rol == 1 || $Rol == 2) {
 <script src="../js/vehiculo.js"></script>
 <script src="../js/propietario.js"></script>
 <script>
+    listar_ordentwo();
     contarRecaudoTotal();
     contarRecaudo();
     contarOrdenTotal();

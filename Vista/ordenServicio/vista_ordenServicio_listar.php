@@ -127,8 +127,16 @@ $Rol = $_SESSION['ROL'];
                       </div>
                       <div class="col-md-4">
                           <div class="form-group">
+
+                    
+
                             <label for="">Fecha de ingreso</label>
-                            <input  type="date" class="form-control" id="txt_fIngreso" style="width:100%; heigth: 40px; text-align:center;" value="<?php echo date("Y-m-d");?>"><br>
+                            <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                        <input type="text" id="txt_fIngreso" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
+                        <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
                           </div>
                         </div>
                       <div class="col-md-4">
@@ -2752,6 +2760,10 @@ $Rol = $_SESSION['ROL'];
   fechaCochenta();
   $(document).ready(function(){ 
     //Initialize Select2 Elements
+
+
+$('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
     $('.select2').select2()
 
     //Initialize Select2 Elements

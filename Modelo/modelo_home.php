@@ -16,6 +16,61 @@ session_start();
             require  'PHPMailer/SMTP.php';
             $this->mail = new PHPMailer();
         }
+
+        function listar_ordentwo($inicioDate,$finDate){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+            if ($Rol == 4) {
+                $wr = "";
+                $com = "and co.id = $idCompany";
+            }else if ($Rol == 1 ) {
+                $com = "";
+                $wr = "";
+            }else if ( $Rol == 2) {
+                $com = "";
+                $wr = "and co.id = $idCompany";
+            }else{ 
+                $wr = "";
+                $com = "and co.id = $idCompany";
+            }
+
+            $sql = "SELECT 
+            v.placa,
+            ( p.nombre + ' ' + p.apellido ) AS propietario,
+            CONVERT ( VARCHAR, s.fIngreso ) AS fIngreso,
+            s.recaudo
+            from
+            servicio as s
+            INNER JOIN vehiculo AS v ON ( v.id = s.idVehiculo )
+            INNER JOIN propietario AS pro ON ( pro.id = v.idPropietario )
+            INNER JOIN persona AS p ON ( p.id = pro.idPersona )
+            INNER JOIN usuario AS u ON ( u.id = s.idUsuario )
+            INNER JOIN persona AS pe ON ( pe.id = u.idPersona )
+            INNER JOIN company AS co ON ( co.id = s.idCompany )
+            WHERE s.estatus = 1 AND s.fIngreso between '$inicioDate' and '$finDate' $com $wr " ; 
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            $data = [];
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data['data'][] = $row;
+                $i++;
+                
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+
+            $this->conexion->conectar();
+        }
+
         function listar_home(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];

@@ -10,34 +10,61 @@
         currency: 'COP',
         minimumFractionDigits: 0
     })
-function listar_home(){
-    table = $('#tabla_alerta').DataTable( {
-        "ordering":true,
-        "paging": true,
-        "searching": { "regex": true },
-        "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-        "pageLength": 10,
-        "destroy":true,
-        "async": true ,
-        "processing": false,
-        "ajax": {
-            "url": "../controlador/home/controlador_home_listar.php",
-            "type": "POST"
-        },
-        "columns": [
-            { "data": "propietario"},
-            { "data": "placa" },
-            { "data": "email" },
-            { "data": "Vencimiento" },
-            { "data": "Fecha" },
-            {"defaultContent":
-            "</button><button style='font-size:13px;' type='button' class='enviarCorreo btn btn-success'><i class='fa fa-envelope'></i></button>"}
-        ],
-        "language":idioma_espanol,
-       select: true
-    } ); 
-    
+    function listar_ordentwo(){
+      
+      rol = $("#rol").val();
+      console.log("rol",rol)
+      var fecha = $("#fecIni").val();
+      var inicioDate = fecha.substring(0, 16);
+      var finDate = fecha.substring(18, 38);
+      table = $('#tabla_orden').DataTable( {
+          "ordering":false,
+          "paging": true,
+          "tabIndex": 0,
+          "searching": { "regex": true },
+          "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+          "pageLength": 10,
+          "destroy":true,
+          "async": true ,
+          "processing": false,
+          "ajax": {
+              "url": "../controlador/home/controlador_listar_orden.php",
+              "type": "POST",
+              data:{
+                inicioDate:inicioDate,
+                finDate:finDate
+                }
+          },
+          "columns": [
+              { "data": "placa" },
+              { "data": "propietario" },
+              { "data": "fIngreso" },
+              { "data": "recaudo" }
+          ],
+          "language":idioma_espanol,
+         select: true
+      } );
+      
+  }
+
+function listar_ordenp(){
+  $("#listar_ordenpe").modal({backdrop:'static',keyboard:false})
+  $("#listar_ordenpe").modal('show');
+  $(document).ready(function(){
+      $('.js-example-basic-single').select2();
+      $("#listar_ordenpe").on('shown.bs.modal',function(){
+      });
+  
+      // inicimos wizzard
+        // BS-Stepper Init
+        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+
+        
+        
+  
+    });
 }
+
 
 /* FUNCION PARA EDITAR REGISTRO
 $('#tabla_alerta').on('click','.enviarCorreo',function(){
