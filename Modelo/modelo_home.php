@@ -43,13 +43,14 @@ session_start();
             s.recaudo
             from
             servicio as s
-            INNER JOIN vehiculo AS v ON ( v.id = s.idVehiculo )
-            INNER JOIN propietario AS pro ON ( pro.id = v.idPropietario )
-            INNER JOIN persona AS p ON ( p.id = pro.idPersona )
-            INNER JOIN usuario AS u ON ( u.id = s.idUsuario )
-            INNER JOIN persona AS pe ON ( pe.id = u.idPersona )
-            INNER JOIN company AS co ON ( co.id = s.idCompany )
+            LEFT JOIN vehiculo AS v ON ( v.id = s.idVehiculo )
+            LEFT  JOIN propietario AS pro ON ( pro.id = v.idPropietario )
+            LEFT  JOIN persona AS p ON ( p.id = pro.idPersona )
+            LEFT  JOIN usuario AS u ON ( u.id = s.idUsuario )
+            LEFT  JOIN persona AS pe ON ( pe.id = u.idPersona )
+            LEFT  JOIN company AS co ON ( co.id = s.idCompany )
             WHERE s.estatus = 1 AND s.fIngreso between '$inicioDate' and '$finDate' $com $wr " ; 
+            //echo $sql;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -307,7 +308,6 @@ session_start();
             s.estatus = 1 
             AND fIngreso between '$inicioDate' and '$finDate'
            ";
-           //echo $sql;exit;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -336,12 +336,11 @@ session_start();
 
 
             $sql  = "SELECT  
-            COUNT(id) as contadorVehiculo 
+            COUNT(id) as contadorVehiculoDiario 
             from vehiculo
             where estatus = 1
-            AND fIngreso between '$inicioDate' and '$finDate'
+            AND fIngresov between '$inicioDate' and '$finDate'
            ";
-           echo $sql;exit;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;

@@ -86,7 +86,7 @@ if ($Rol == 1 || $Rol == 2) {
           
         <label style="margin-left:8px; margin-top:5px;" for="">Seleccionar fechas:</label>
         <input type="text" class="form-control" id="fecIni" style="margin-left:8px; width:26%; heigth: 40px; text-align:center;" >
-        <button type="button" class="btn btn-primary" onclick="contarRecaudo(); contarOrden(); contarVehiculoUnit(); contarCliente(); listar_ordentwo();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
+        <button type="button" class="btn btn-primary" onclick="contarRecaudo(); contarOrden(); contarVehiculoUnit(); contarCliente();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
         </div>
         <br>
             <div class="row">
@@ -124,7 +124,7 @@ if ($Rol == 1 || $Rol == 2) {
                 <div class="col-lg-3 col-3">
                     <div class="small-box" style="background-color:#0800FF; color:#FFFFFF;">
                         <div class="inner">
-                        <h3 id="contadorVehiculo">0</h3>
+                        <h3 id="contadorVehiculoDiario">0</h3>
                         <p>Vehículos diarios</p>
                         </div>
                         <div class="icon">
@@ -318,7 +318,7 @@ if ($Rol == 1 || $Rol == 2) {
                       <th>Recaudo</th>
                     </tr>
                     </thead>
-                    <tbody id="ListadoOrden">
+                    <tbody id="listar_ordentwo">
                     </tbody>
             </table>
   </div>
@@ -336,7 +336,6 @@ if ($Rol == 1 || $Rol == 2) {
 <script src="../js/vehiculo.js"></script>
 <script src="../js/propietario.js"></script>
 <script>
-    listar_ordentwo();
     contarRecaudoTotal();
     contarRecaudo();
     contarOrdenTotal();

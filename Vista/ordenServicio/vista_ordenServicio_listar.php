@@ -34,7 +34,7 @@ $Rol = $_SESSION['ROL'];
                       <th>Orden</th>
                       <th>Placa</th>
                       <th>Cliente</th>
-                      <th>Estatus correo</th>
+                      <th>Estado</th>
                       <th>Técnico</th>
                       <th>Fecha de recepcion</th>
                       <th>Usuario</th>

@@ -192,7 +192,29 @@
 
     });
   });
+  $(document).ready(function(){
+    $('#excel').DataTable({
+      dom: "Bfrtip",
+      buttons:{
+        dom:{
+          button:{
+            className: 'btn'
+          }
+        },
+        buttons: [
+          {
+            extend: "excel",
+            text: 'exportar a excel',
+            className: 'btn btn-outline-success',
+            excelStyles:{
+              template:'header_blue'
+            }
+          }
+        ]
+      }
+    });
+  });
     
-
+  
 </script>
 

@@ -23,17 +23,17 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
             if ($Rol == 4) {
-                $wr = "";
-                $com = "and co.id = $idCompany";
+                $com = "WHERE s.estatus = 1";
+                $wr = "and co.id = $idCompany";
             }else if ($Rol == 1 ) {
                 $com = "";
                 $wr = "";
             }else if ( $Rol == 2) {
-                $com = "";
+                $com = "WHERE s.estatus = 1";
                 $wr = "and co.id = $idCompany";
             }else{ 
-                $wr = "";
-                $com = "and co.id = $idCompany";
+                $com = "WHERE s.estatus = 1";
+                $wr = "and co.id = $idCompany";
             }
 
             $sql = "SELECT 
@@ -41,7 +41,7 @@ session_start();
             s.id,
             v.placa,
             ( p.nombre + ' ' + p.apellido ) AS propietario,
-            s.eCorreo,
+            s.estatus,
             s.tecnico,
             CONVERT ( VARCHAR, s.fIngreso ) AS fIngreso,
             ( pe.nombre + ' ' + pe.apellido ) AS usuario,
@@ -49,13 +49,13 @@ session_start();
             s.observaciones1 as observaciones
             from
             servicio as s
-            INNER JOIN vehiculo AS v ON ( v.id = s.idVehiculo )
-            INNER JOIN propietario AS pro ON ( pro.id = v.idPropietario )
-            INNER JOIN persona AS p ON ( p.id = pro.idPersona )
-            INNER JOIN usuario AS u ON ( u.id = s.idUsuario )
-            INNER JOIN persona AS pe ON ( pe.id = u.idPersona )
-            INNER JOIN company AS co ON ( co.id = s.idCompany )
-            WHERE s.estatus = 1 $com $wr " ;
+            LEFT JOIN vehiculo AS v ON ( v.id = s.idVehiculo )
+            LEFT JOIN propietario AS pro ON ( pro.id = v.idPropietario )
+            LEFT JOIN persona AS p ON ( p.id = pro.idPersona )
+            LEFT JOIN usuario AS u ON ( u.id = s.idUsuario )
+            LEFT JOIN persona AS pe ON ( pe.id = u.idPersona )
+            LEFT JOIN company AS co ON ( co.id = s.idCompany )
+            $com $wr ORDER BY s.id DESC";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;

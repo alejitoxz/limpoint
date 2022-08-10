@@ -11,7 +11,6 @@
         minimumFractionDigits: 0
     })
     function listar_ordentwo(){
-      
       rol = $("#rol").val();
       console.log("rol",rol)
       var fecha = $("#fecIni").val();
@@ -39,7 +38,10 @@
               { "data": "placa" },
               { "data": "propietario" },
               { "data": "fIngreso" },
-              { "data": "recaudo" }
+              { "data": "recaudo" ,
+              render: function(data, type, row){
+                return formatterPesoHome.format(data);
+              }}
           ],
           "language":idioma_espanol,
          select: true
@@ -50,6 +52,8 @@
 function listar_ordenp(){
   $("#listar_ordenpe").modal({backdrop:'static',keyboard:false})
   $("#listar_ordenpe").modal('show');
+  listar_ordentwo();
+
   $(document).ready(function(){
       $('.js-example-basic-single').select2();
       $("#listar_ordenpe").on('shown.bs.modal',function(){
@@ -58,7 +62,7 @@ function listar_ordenp(){
       // inicimos wizzard
         // BS-Stepper Init
         window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-
+        listar_ordentwo();
         
         
   
@@ -164,9 +168,9 @@ function contarVehiculoUnit(){
   var resultado=eval("("+req+")");
 
       if(resultado.length>0){
-          $("#contadorServicio").html(resultado[0]['contadorVehiculo']);
+          $("#contadorVehiculoDiario").html(resultado[0]['contadorVehiculoDiario']);
        }else{
-          $("#contadorServicio").html(0);
+          $("#contadorVehiculoDiario").html(0);
        }
           
           
@@ -646,10 +650,9 @@ const fin = fechaActual+" 23:59";
 $("#fecIni").daterangepicker({
   timePicker: true,
   timePicker24Hour:true,
-  startDate: moment().inicio, 
-  endDate: moment().fin,
+  
   locale: {
-    format: 'YYYY/MM/DD HH:MM'
+    format: 'YYYY/MM/DD HH:ss'
   }
 
 });

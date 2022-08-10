@@ -127,17 +127,18 @@ session_start();
         function registrar_propietario($id,$nombre,$apellido,$telefono,$email,$placa,$tipoVehiculo,$alianza){
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
+            $date=@date('Y-m-d H:i:s');
             $cadena = "";
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,telefono,email)
                 VALUES('$nombre','$apellido','$telefono','$email')
                 SET @idPersona = SCOPE_IDENTITY()
                 DECLARE @idPropietario int
-                INSERT INTO propietario(idPersona,estatus,idCompany,idUsuario) 
-                VALUES(@idPersona,1,$idCompany,$idUsuario)
+                INSERT INTO propietario(idPersona,idUsuario,idCompany,estatus,fIngresop) 
+                VALUES(@idPersona,$idUsuario,$idCompany,1,'$date')
                 SET @idPropietario = SCOPE_IDENTITY()
-                INSERT INTO vehiculo(placa,tipoVehiculo,alianza,estatus,idPropietario,idCompany,idUsuario)
-                VALUES('$placa','$tipoVehiculo','$alianza',1,@idPropietario,$idCompany,$idUsuario)
+                INSERT INTO vehiculo(placa,tipoVehiculo,alianza,estatus,idPropietario,idCompany,idUsuario,fIngresov)
+                VALUES('$placa','$tipoVehiculo','$alianza',1,@idPropietario,$idCompany,$idUsuario,'$date')
                 ";
             $conn = $this->conexion->conectar();
             $sql  = "BEGIN TRY

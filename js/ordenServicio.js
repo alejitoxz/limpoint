@@ -1,9 +1,12 @@
 
 
-
-
 var table;
 var rol;
+const formatterPesoHomes  = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+})
 function listar_orden(){
 
     rol = $("#rol").val();
@@ -27,9 +30,6 @@ function listar_orden(){
                 "targets": [ 0 ],
                 "visible": false
             },{
-                "targets": [ 4 ],
-                "visible": false
-            },{
                 "targets": [ 5 ],
                 "visible": false
             }
@@ -39,12 +39,12 @@ function listar_orden(){
             { "data": "id" },
             { "data": "placa" },
             { "data": "propietario" },
-            { "data": "eCorreo",
+            { "data": "estatus",
             render: function(data, type, row){
                 if(data=='1'){
-                    return "<span class='badge bg-primary'>Correo enviado</span>"
+                    return "<span class='badge bg-primary'>Activo</span>"
                 }else{
-                    return "<span class='badge bg-danger'>Correo no enviado</span>"
+                    return "<span class='badge bg-danger'>Inactivo</span>"
                 }
             }
             },
@@ -58,7 +58,10 @@ function listar_orden(){
             },
             { "data": "fIngreso" },
             { "data": "usuario" },
-            { "data": "recaudo" },
+            { "data": "recaudo" ,
+            render: function(data, type, row){
+              return "<span class='h5 text-primary'><strong>"+formatterPesoHome.format(data)+"</strong></span>" 
+            }},
             { "data": "observaciones" },
             
             {
@@ -76,6 +79,7 @@ function listar_orden(){
     } );
     
 }
+
 //funcion para crear cliente
 function crear_cliente(){
     $(".modal-backdrop").hide();
