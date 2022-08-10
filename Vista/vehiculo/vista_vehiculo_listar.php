@@ -15,7 +15,7 @@
             <div class="form-group">
                 <div class="col-lg-10">
                     <div class="col-lg-2">
-                    <button type="button" class="btn btn-primary"  onclick="AbrirModalRegistroVehiculo()" ><i class="fas fa-plus"></i> Registrar</button>
+                    <button type="button" style="margin-left:-15px;" class="btn btn-primary"  onclick="AbrirModalRegistroVehiculo()" ><i class="fas fa-plus"></i> Registrar</button>
                     </div> 
                 </div>
             </div>

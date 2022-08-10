@@ -176,15 +176,15 @@ function contarVehiculoUnit(){
           
   })
 }
-function contarcliente(){
+function contarclienteUnit(){
 
-  $("#contadorServicio").html(0);
+  $("#contadorClienteDiario").html(0);
 
   var fecha = $("#fecIni").val();
   var inicioDate = fecha.substring(0, 16);
   var finDate = fecha.substring(18, 38);
   $.ajax({
-      url:'../controlador/home/controlador_contador_orden.php',
+      url:'../controlador/home/controlador_contador_clienteUnit.php',
       type:'post',
       data:{
         inicioDate:inicioDate,
@@ -194,9 +194,35 @@ function contarcliente(){
   var resultado=eval("("+req+")");
 
       if(resultado.length>0){
-          $("#contadorServicio").html(resultado[0]['contadorServicio']);
+          $("#contadorClienteDiario").html(resultado[0]['contadorClienteDiario']);
        }else{
-          $("#contadorServicio").html(0);
+          $("#contadorClienteDiario").html(0);
+       }
+          
+          
+  })
+}
+function contarclienteTotal(){
+
+  $("#contadorClienteTotal").html(0);
+
+  var fecha = $("#fecIni").val();
+  var inicioDate = fecha.substring(0, 16);
+  var finDate = fecha.substring(18, 38);
+  $.ajax({
+      url:'../controlador/home/controlador_contador_clienteTotal.php',
+      type:'post',
+      data:{
+        inicioDate:inicioDate,
+        finDate:finDate
+        }
+  }).done(function(req){
+  var resultado=eval("("+req+")");
+
+      if(resultado.length>0){
+          $("#contadorClienteTotal").html(resultado[0]['contadorClienteTotal']);
+       }else{
+          $("#contadorClienteTotal").html(0);
        }
           
           

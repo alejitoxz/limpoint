@@ -1,11 +1,33 @@
 var tabla_vehiculo;
 function listar_vehiculo(){
     tabla_vehiculo = $('#tabla_vehiculos').DataTable( {
+        "dom": 'Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'excel',
+                title: 'Listado de vehiculos',
+                "exportOptions":{
+		        	'columns':[3,4,5,6,7,8,9]
+		        },
+            },{
+                extend: 'pdf',
+                title: 'Listado de vehiculos',
+                "exportOptions":{
+		        	'columns':[3,4,5,6,7,8,9]
+		        },
+            },{
+                extend: 'print',
+                title: 'Listado de vehiculos',
+                "exportOptions":{
+		        	'columns':[3,4,5,6,7,8,9]
+		        },
+            }
+        ],
         "ordering":false,
         "paging": true,
         "searching": { "regex": true },
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-        "pageLength": 10,
+        "pageLength": 50,
         "destroy":true,
         "async": true ,
         "processing": false,
@@ -34,7 +56,13 @@ function listar_vehiculo(){
             { "data": "id" },
             { "data": "placa" },
             { "data": "marca" },
-            { "data": "tipoVehiculo" },
+            { "data": "tipoVehiculo" ,
+            render: function(data, type, row){
+                if(data=='1'){
+                    return "Camioneta"
+                }else{
+                    return "Automovil"
+                }}},
             { "data": "alianza" },
             { "data": "empresa" },
             { "data": "nombre" },

@@ -2,18 +2,32 @@ var table;
 function listar_propietario(){
     table = $('#tabla_propietario').DataTable( {
         "dom": 'Bfrtip',
-        "buttons": [
-            'csv', 
+        "buttons": [ 
             {
                 extend: 'excel',
                 title: 'Listado clientes',
-            }, 'pdf', 'print'
+                "exportOptions":{
+		        	'columns':[1,2,3,4,5]
+		        },
+            },{
+                extend: 'pdf',
+                title: 'Listado clientes',
+                "exportOptions":{
+		        	'columns':[1,2,3,4,5]
+		        },
+            },{
+                extend: 'print',
+                title: 'Listado clientes',
+                "exportOptions":{
+		        	'columns':[1,2,3,4,5]
+		        },
+            }
         ],
         "ordering":false,
         "paging": true,
         "searching": { "regex": true },
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-        "pageLength": 10,
+        "pageLength": 50,
         "destroy":true,
         "async": true ,
         "processing": false,

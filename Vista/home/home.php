@@ -86,7 +86,7 @@ if ($Rol == 1 || $Rol == 2) {
           
         <label style="margin-left:8px; margin-top:5px;" for="">Seleccionar fechas:</label>
         <input type="text" class="form-control" id="fecIni" style="margin-left:8px; width:26%; heigth: 40px; text-align:center;" >
-        <button type="button" class="btn btn-primary" onclick="contarRecaudo(); contarOrden(); contarVehiculoUnit(); contarCliente();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
+        <button type="button" class="btn btn-primary" onclick="contarRecaudo(); contarOrden(); contarVehiculoUnit(); contarclienteUnit();" style="margin-left:4px; width:50px; border-radius:15%;"><i class="fa fa-caret-right"> </i></button><br>
         </div>
         <br>
             <div class="row">
@@ -140,7 +140,7 @@ if ($Rol == 1 || $Rol == 2) {
                     <!-- small box -->
                     <div class="small-box" style="background-color:#4AD5E8; color:#FFFFFF;">
                     <div class="inner">
-                    <h3 id="contadorPropietario">0</h3>
+                    <h3 id="contadorClienteDiario">0</h3>
                         <p>Clientes diarios</p>
                     </div>
                     <div class="icon">
@@ -342,7 +342,7 @@ if ($Rol == 1 || $Rol == 2) {
     contarOrden();
     contarVehiculo();
     contarVehiculoUnit();
-    contarClienteUnit();
+    contarclienteUnit();
     contarPropietario();
     //graficaOrdenes();
     //graficaBateria();

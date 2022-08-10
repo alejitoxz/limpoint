@@ -360,6 +360,71 @@ session_start();
             
             $this->conexion->conectar();
         }
+        function contador_clienteUnit($inicioDate,$finDate){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+
+            $sql  = "SELECT  
+            COUNT(id) as contadorClienteDiario 
+            from propietario
+            where estatus = 1
+            AND fIngresop between '$inicioDate' and '$finDate'
+           ";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
+        function contador_clinteTotal($inicioDate,$finDate){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+
+            $sql  = "SELECT COUNT(p.id) 
+            AS contadorClienteTotal 
+            FROM
+            propietario AS p
+            WHERE
+            p.estatus = 1 
+           ";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
         function contador_ordenTotal(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
