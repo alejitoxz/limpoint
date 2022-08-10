@@ -1,6 +1,14 @@
 var table;
 function listar_propietario(){
     table = $('#tabla_propietario').DataTable( {
+        "dom": 'Bfrtip',
+        "buttons": [
+            'csv', 
+            {
+                extend: 'excel',
+                title: 'Listado clientes',
+            }, 'pdf', 'print'
+        ],
         "ordering":false,
         "paging": true,
         "searching": { "regex": true },
@@ -31,7 +39,7 @@ function listar_propietario(){
         ],
         "language":idioma_espanol,
        select: true
-    } );
+    }).buttons().container().appendTo('#example1_wrapper');
     
 }
 function listar_alianzap(){

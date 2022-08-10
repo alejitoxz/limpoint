@@ -177,6 +177,8 @@
 
 <script>
 
+$(document).ready(function(){
+
     $('#txt_telp').on('input', function () { 
         this.value = this.value.replace(/[^0-9]/g,'');
     });
@@ -184,36 +186,17 @@
         this.value = this.value.replace(/[^0-9]/g,'');
     });
 
-  $(document).ready(function(){
+  
     listar_propietario();
     listar_alianzap();
     $('.js-example-basic-single').select2();
     $("#modal_registro_propietario").on('shown.bs.modal',function(){
 
     });
-  });
-  $(document).ready(function(){
-    $('#excel').DataTable({
-      dom: "Bfrtip",
-      buttons:{
-        dom:{
-          button:{
-            className: 'btn'
-          }
-        },
-        buttons: [
-          {
-            extend: "excel",
-            text: 'exportar a excel',
-            className: 'btn btn-outline-success',
-            excelStyles:{
-              template:'header_blue'
-            }
-          }
-        ]
-      }
-    });
-  });
+  
+  
+
+});
     
   
 </script>
