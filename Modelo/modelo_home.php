@@ -237,17 +237,15 @@ session_start();
         function listar_grafico_orden($inicioDate,$finDate){
             $conn = $this->conexion->conectar();
           
-            $sql  = " SELECT COUNT
-                            ( * ) AS cantidad,
-                            MONTH ( s.fecha_creacion ) MONTH 
-                        FROM
-                            ordenServicio AS s 
-                           where s.estatus = 1 
-                           and s.fecha_creacion between '$inicioDate' and '$finDate'
-
-                        GROUP BY
-                            MONTH ( s.fecha_creacion )
-            ";
+            $sql  = " SELECT sum (CONVERT(int,s.recaudo)) AS cantidad,
+            MONTH ( s.fIngreso ) MONTH 
+            FROM
+            servicio AS s 
+            WHERE
+            s.estatus = 1 
+            GROUP BY
+            MONTH ( s.fIngreso )
+            "; 
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -281,9 +279,6 @@ session_start();
                 }            
             }
            
-
-            
-                  
             if($data>0){
                 return $data;
             }else{
@@ -528,186 +523,112 @@ session_start();
             
             $this->conexion->conectar();
         }
-/*
-        function listar_grafico_aceitico($inicioDate,$finDate){
-            
-            $conn = $this->conexion->conectar();
 
-            $sql="SELECT
-                    md.id,
-                    md.descripcion as nombres
-                FROM
-                    miscelaneos_detalle as md
-                    INNER JOIN miscelaneos AS m ON (m.id= md.id_miscelaneo)
-                    WHERE md.estatus = 1 and m.id = 14
-                ";
-            $resp=sqlsrv_query($conn,$sql);
-            if( $resp === false ) { echo ciudad; exit; }	
-            $i=0;
-            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC)) {
-                $aceite[$i]=$row;
-                $i++;
-            }
-            //  contadores historial
-            $sql="SELECT * from (
-					SELECT COUNT
-							( * ) AS cantidad,
-							s.motorMarca as idAceite
-					FROM
-							ordenServicio AS os
-							INNER JOIN servicio AS s ON ( s.id = os.idServicio) 
-							INNER JOIN miscelaneos_detalle AS md ON ( md.id = s.motorMarca) 
-					WHERE
-							os.estatus = 1  and os.fecha_creacion between '$inicioDate' and '$finDate'
-					GROUP BY
-							s.motorMarca 
-			
-			union
-			
-			
-			SELECT COUNT
-							( * ) AS cantidad,
-							s.cajaMarca as idAceite
-					FROM
-							ordenServicio AS os
-							INNER JOIN servicio AS s ON ( s.id = os.idServicio) 
-							INNER JOIN miscelaneos_detalle AS md ON ( md.id = s.cajaMarca) 
-					WHERE
-							os.estatus = 1 and os.fecha_creacion between '$inicioDate' and '$finDate'
-					GROUP BY
-							s.cajaMarca 
-							) AS t
-                ";
-            
-select * from (
-	SELECT COUNT
-		( * ) AS cantidad,
-		md.descripcion
-	FROM
-		ordenServicio AS os
-		INNER JOIN servicio AS s ON ( s.id = os.idServicio) 
-		INNER JOIN miscelaneos_detalle AS md ON ( md.id = s.motorMarca) 
-	WHERE
-		os.estatus = 1 
-	GROUP BY
-		md.descripcion
-	
-
-
-union ALL
-
-
-
-SELECT COUNT
-		( * ) AS cantidad,
-		md.descripcion
-	FROM
-		ordenServicio AS os
-		INNER JOIN servicio AS s ON ( s.id = os.idServicio) 
-		INNER JOIN miscelaneos_detalle AS md ON ( md.id = s.cajaMarca) 
-	WHERE
-		os.estatus = 1 
-	GROUP BY
-		md.descripcion
-		) as hol ORDER BY descripcion
-
-            $resp=sqlsrv_query($conn,$sql);
-            if( $resp === false ) { echo estadistica; exit; }	
-            $i=0;
-            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC)) {
-            $orden[$i]=$row;
-            $i++;
-            }
-            $data      = [];
-    
-            for($x=0; $x<count($aceite);$x++){
-        
-            $arrayData      = [];
-            $arrayDatax     = [];
-
-            for($j=0; $j<count($orden); $j++){
-                if(intval($orden[$j]["idAceite"]) === intval($aceite[$x]["id"])){
-
-                    $cantidad = $orden[$j]["cantidad"];
-                    $StatusField = $aceite[$x]["nombres"];
-                    $arrayData = ["nombres"=>$StatusField,"cantidad"=>$cantidad];
-                    array_push($data,$arrayData); 
-                }    
-            }  
-
-            }
-
-            if($data>0){
-                return $data;
-            }else{
-                return 0;
-            }
-            
-            $this->conexion->conectar();
-           
-        }
 
         function listar_grafico_tecnico($inicioDate,$finDate){
             
             $conn = $this->conexion->conectar();
 
-            $sql="SELECT
-                    t.id,
-                    p.nombre+' '+p.apellido as nombres
-                FROM
-                    tecnico as t
-                    INNER JOIN persona AS p ON (t.idPersona= p.id)
-                    WHERE t.estatus = 1 
+            /*$sql="SELECT
+            id,
+            tipoVehiculo
+            FROM
+            vehiculo 
+            WHERE
+            estatus = 1
                 ";
                // echo $sql;
             $resp=sqlsrv_query($conn,$sql);
-            if( $resp === false ) { echo ciudad; exit; }	
+            if( $resp === false ) { echo tipo; exit; }	
             $i=0;
             while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC)) {
-                $tecnico[$i]=$row;
+                $tipo[$i]=$row;
                 $i++;
             }
             //  contadores historial
-            $sql="SELECT COUNT ( * ) AS cantidad,
-                    os.idTecnico
-                    FROM ordenServicio AS os
-                    INNER JOIN tecnico as t ON (t.id = os.idTecnico)
-                    INNER JOIN persona AS p ON ( p.id = t.idPersona )
-                    WHERE os.estatus = 1 and os.fecha_creacion between '$inicioDate' and '$finDate'
-                    GROUP BY os.idTecnico
-                ";
+            $sql="SELECT COUNT
+            ( * ) AS cantidad,
+            os.tipoVehiculo as idTipo
+            FROM
+            vehiculo as os
+            WHERE
+            os.estatus = 1 and os.fIngresov between '2022/07/23 00:00' 
+	        AND ' 2022/08/23 23:59' 
+            GROUP BY
+            os.tipoVehiculo
+                "; 
 
             $resp=sqlsrv_query($conn,$sql);
-            if( $resp === false ) { echo estadistica; exit; }	
+            if( $resp === false ) { echo cantidad; exit; }	
             $i=0;
             while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC)) {
-            $orden[$i]=$row;
+            $vehiculo[$i]=$row;
             $i++;
             }
             $data      = [];
-    
-            for($x=0; $x<count($tecnico);$x++){
+            for($x=0; $x<count($tipo);$x++){
         
             $arrayData      = [];
             $arrayDatax     = [];
 
-            for($j=0; $j<count($orden); $j++){
-                if(intval($orden[$j]["idTecnico"]) === intval($tecnico[$x]["id"])){
-                    $cantidad = $orden[$j]["cantidad"];
+            for($j=0; $j<count($vehiculo); $j++){
+                //echo $orden[$j]["idTecnico"]." == ".$tecnico[$x]["id"];
+                if(intval($vehiculo[$j]["idTipo"]) === intval($tipo[$x]["id"])){
+                    $cantidad = $vehiculo[$j]["cantidad"];
                       
-                }    
-            }  
-
+                }  
+            }
             array_push($arrayDatax,$cantidad); 
-            if($i==count($asesor2)){
-            $StatusField = $tecnico[$x]["nombres"];
+
+            $StatusField = $tipo[$x]["tipoVehiculo"];
             
             $arrayData = ["nombres"=>$StatusField,"cantidad"=>$cantidad];
             array_push($data,$arrayData); 
-            
-            }
+            */
 
-            //var_dump($data);
+            $sql = "SELECT * FROM 
+
+            (
+            SELECT
+            COUNT
+                ( * ) AS cantidad,
+                os.tipoVehiculo 
+            FROM
+                vehiculo AS os 
+            WHERE
+                os.estatus = 1 and os.tipoVehiculo = 1
+                AND os.fIngresov between '$inicioDate' and '$finDate'
+            GROUP BY
+                os.tipoVehiculo
+                
+                UNION 
+                
+                SELECT
+            COUNT
+                ( * ) AS cantidad,
+                os.tipoVehiculo 
+            FROM
+                vehiculo AS os 
+            WHERE
+                os.estatus = 1 and os.tipoVehiculo = 2
+                AND os.fIngresov between '$inicioDate' and '$finDate'
+            GROUP BY
+                os.tipoVehiculo
+                
+                ) AS tabla
+
+                
+            ";
+          
+          $resp=sqlsrv_query($conn,$sql);
+          if( $resp === false ) { echo tipo; exit; }	
+          $i=0;
+          while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC)) {
+              $data[$i]=$row;
+              $i++;
+          }
+
+           // var_dump($data);
 
             if($data>0){
                 return $data;
@@ -715,7 +636,6 @@ SELECT COUNT
                 return 0;
             }
             
-            $this->conexion->conectar();
            
         }
 
@@ -780,13 +700,12 @@ SELECT COUNT
             $conn = $this->conexion->conectar();
 
             $sql="SELECT
-                id,
-                descripcion AS nombres 
-                FROM
-                miscelaneos_detalle 
-                WHERE
-                estatus = 1 
-                AND id_miscelaneo = 19
+            id,
+            entResp AS nombres 
+            FROM
+            company
+            WHERE
+            estatus = 1 
                 ";
             $resp=sqlsrv_query($conn,$sql);
             if( $resp === false ) { echo ciudad; exit; }	
@@ -796,52 +715,44 @@ SELECT COUNT
                 $i++;
             }
             //  contadores historial
-            $sql="SELECT COUNT
-            ( * ) AS cantidad,
-            s.marca as idBateria
+            $sql="SELECT sum (CONVERT(int,os.recaudo)) AS cantidad,
+            os.idCompany AS idBateria 
             FROM
-            ordenServicio AS os
-            INNER JOIN servicio AS s ON ( s.id = os.idServicio )
-            INNER JOIN miscelaneos_detalle AS md ON ( md.id = s.marca ) 
+            Servicio AS os
+            INNER JOIN company AS c ON ( os.idCompany = c.id )
             WHERE
-            os.estatus = 1 and md.estatus = 1 AND md.id_miscelaneo = 19 and os.fecha_creacion between '$inicioDate' and '$finDate'
-            GROUP BY
-            s.marca
-                ";
-
+            os.estatus = 1 AND os.fIngreso BETWEEN  '$inicioDate' and '$finDate'
+            GROUP BY os.idCompany 
+            ";
+            
             $resp=sqlsrv_query($conn,$sql);
-            if( $resp === false ) { echo estadistica; exit; }	
-            $i=0;
+            if( $resp === false ) { echo orden; exit; }	
+            $p=0;
             while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC)) {
-            $orden[$i]=$row;
+            $orden[$p]=$row;
             $i++;
             }
             $data      = [];
-    
             for($x=0; $x<count($bateria);$x++){
                 
                 $arrayData      = [];
                 $arrayDatax     = [];
                 for($j=0; $j<count($orden); $j++){
-                    
+                    //echo $orden[$j]["idBateria"] ." == ".$bateria[$x]["id"];
                     if( intval($orden[$j]["idBateria"]) === intval($bateria[$x]["id"]) ){
                         
                         $cantidad = $orden[$j]["cantidad"];
                         $StatusField = $bateria[$x]["nombres"];
                         $arrayData = ["nombres"=>$StatusField,"cantidad"=>$cantidad];
-                        array_push($data,$arrayData); 
-                    }   
-                    
-                }  
-                                
+                        array_push($data,$arrayData);
+                    }     
+                } 
                 
                
-                
+                      
             }
 
             
-           
-
             if($data>0){
                 return $data;
             }else{
@@ -850,9 +761,9 @@ SELECT COUNT
             
             $this->conexion->conectar();
            
-        }*/
-        
+        }
 
+        /*
         function enviarVencimiento($Propietario,$Placa,$Vencimiento,$Fecha,$Email){
             
             //echo $Email;
@@ -991,8 +902,8 @@ SELECT COUNT
                 }catch( Exception  $e ) {
                     echo 0 ;
                 }
-            }
-        }
+            }*/
+        
 
 
 }

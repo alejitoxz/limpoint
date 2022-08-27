@@ -1,9 +1,10 @@
-/*const colorArray = [
+const colorArray = [
 		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
 		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
 		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
 		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];*/
+		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+      
       var table;
       const formatterPesoHome  = new Intl.NumberFormat('es-CO', {
         style: 'currency',
@@ -299,7 +300,7 @@ function contarRecaudo(){
   })
 }
 
-/* funcion para charts de ordenbes de servicio por meses
+/* funcion para charts de ordenbes de servicio por meses */
 function graficaOrdenes(){
   var fecha = $("#fecIni").val();
   var inicioDate = fecha.substring(0, 16);
@@ -357,7 +358,8 @@ function graficaOrdenes(){
     new Chart(areaChartCanvas, {
       type: 'bar',
       data: areaChartData,
-      options: areaChartOptions
+      options: areaChartOptions,
+      
     })
 
     })
@@ -378,7 +380,7 @@ function graficaBateria(){
   }).done(function(resp){
   
     var resultado = eval("(" + resp + ")");
-  
+    console.log("alianza",resp);
       var nombres =[];
       var cantidad =[];
         for(var i=0; i<resultado.length;i++){
@@ -590,16 +592,22 @@ function graficaTecnico(){
         finDate:finDate
         }
   }).done(function(resp){
-  
+    
     var resultado = eval("(" + resp + ")");
-  
+    
       var nombres =[];
       var cantidad =[];
         for(var i=0; i<resultado.length;i++){
 
         
-          nombres[i] = resultado[i]["nombres"]
-          cantidad[i] = resultado[i]["cantidad"]
+          if (resultado[i]["tipoVehiculo"] == 1) {
+            nombres[i] = "AUTOMOVIL";
+            cantidad[i] = resultado[i]["cantidad"]
+          }else if (resultado[i]["tipoVehiculo"] == 2) {
+            nombres[i] = "CAMIONETA";
+            cantidad[i] = resultado[i]["cantidad"]
+          }
+          
         
         }
                
@@ -662,7 +670,7 @@ function enviarCorreoA(){
       "url": "../Controlador/home/controlador_home_enviar_vencimientoA.php",
       "type": "POST"
     })
-}*/
+}
 
 const date = new Date();
 const year = date.getFullYear();

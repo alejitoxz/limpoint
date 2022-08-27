@@ -211,7 +211,43 @@ session_start();
             
             $this->conexion->conectar();
         }
-    
+        
+        function listar_punto(){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+            if ($Rol == 1) {
+                $wr = "and s.idUsuario = $idUsuario";
+                $com = "and u.idCompany = $idCompany";
+            }else if ($Rol == 2) {
+                $com = "";
+                $wr = "";
+            }else{
+                $wr = "";
+                $com = "and u.idCompany = $idCompany";
+            }
+            $sql  = "SELECT id, entResp from company where estatus = 1";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+			$i = 0;
+            $data = [];
+			while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+			{
+				$data[$i] = $row;
+				$i++;
+			}
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
         function listar_ent(){
             $conn = $this->conexion->conectar();
             $sql  = "SELECT id, entResp from company";
@@ -278,7 +314,7 @@ session_start();
             $this->conexion->conectar();
         }
 
-        function registrar_usuario($id,$nombre,$apellido,$telefono,$email,$usuario,$clave,$tipoRol){
+        function registrar_usuario($id,$nombre,$apellido,$telefono,$email,$usuario,$clave,$tipoRol,$punto){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
             $cadena = "";
@@ -288,7 +324,7 @@ session_start();
                 VALUES('$nombre','$apellido','$telefono','$email')
                 SET @idPersona = SCOPE_IDENTITY()
                 INSERT INTO Usuario(idPersona,usuario,clave,idRol,idCompany,status) 
-                VALUES(@idPersona,'$usuario','$clave',$tipoRol,$idCompany,1)";
+                VALUES(@idPersona,'$usuario','$clave',$tipoRol,$punto,1)";
 
             $sql  = "BEGIN TRY
                      BEGIN TRAN
@@ -328,7 +364,7 @@ session_start();
             
             $this->conexion->conectar();
         }
-        function modificar_datos_usuario($id,$nombre,$apellido,$telefono,$email,$usuario,$clave,$tipoRol,$idPersona){
+        function modificar_datos_usuario($id,$nombre,$apellido,$telefono,$email,$usuario,$clave,$tipoRol,$idPersona,$punto){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
             if($clave == 'ERROR'){
@@ -349,7 +385,8 @@ session_start();
                     UPDATE usuario SET
                     usuario= '$usuario' 
                     $claveValidacion,
-                    idRol= $tipoRol
+                    idRol= $tipoRol,
+                    idCompany= $punto
                     WHERE id=$id
 
                     COMMIT TRAN

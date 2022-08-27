@@ -187,7 +187,7 @@ session_start();
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
         $idUsuario = $_SESSION['S_ID'];
-
+        $date=@date('Y-m-d H:i:s');
         $sql  = "INSERT INTO vehiculo(
                             placa,
                             tipovehiculo,
@@ -196,7 +196,8 @@ session_start();
                             idPropietario,
                             idCompany,
                             idUsuario,
-                            marca
+                            marca,
+                            fIngresov
                             )
                  VALUES(
                         '$placa',
@@ -206,7 +207,8 @@ session_start();
                         $pro_vehiculo,
                         $idCompany,
                         $idUsuario,
-                        $marca
+                        $marca,
+                        '$date'
                         )
                  ";
         $resp = sqlsrv_query($conn, $sql);

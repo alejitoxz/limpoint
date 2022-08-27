@@ -160,7 +160,9 @@ $('#tabla_usuario').on('click','.editar',function(){
     var usuario = datosUsuario.usuario;
     var clave = datosUsuario.clave;
     var idRol = datosUsuario.idRol;
+    var punto = datosUsuario.entResp;
     var idPersona = datosUsuario.idPersona;
+    
     //levantar modal
     AbrirModalEditar();
     //ingresas datos modal
@@ -173,6 +175,7 @@ $('#tabla_usuario').on('click','.editar',function(){
     $("#txt_con_edit").val('');
     $("#txt_con2_edit").val('');
     $("#sel_rol_edit").val(idRol).trigger('change');
+    $("#sel_punto_editar").val(punto).trigger('change');
     $("#idPersona").val(idPersona);
 
 })
@@ -186,6 +189,7 @@ function modificar_usuario(){
     var clave = $("#txt_con_edit").val();
     var clave2 = $("#txt_con2_edit").val();
     var tipoRol = $("#sel_rol_edit").val();
+    var punto = $("#sel_punto_editar").val();
     var idPersona = $("#idPersona").val();
 
     if( id == ''||
@@ -218,7 +222,8 @@ function modificar_usuario(){
         email:email,
         usuario:usuario,
         clave:clave,
-        tipoRol:tipoRol
+        tipoRol:tipoRol,
+        punto:punto
         }
     }).done(function(resp){
         console.log(resp);
@@ -235,6 +240,7 @@ function modificar_usuario(){
     })
 
 }
+
 
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_usuario').on('click','.eliminar',function(){
@@ -317,6 +323,27 @@ function listar_rol(){
 }
 
 
+function listar_punto(){
+    $.ajax({
+        "url": "../controlador/usuario/controlador_punto_listar.php",
+        "type": "POST"
+    }).done(function(resp){
+        
+        var data = JSON.parse(resp);
+        
+        var cadena="";
+        if(data.length>0){
+            cadena+="<option value='0'>Seleccionar</option>"; 
+            for(var i=0; i < data.length; i++){
+                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['entResp']+"</option>";
+            }
+            $("#sel_punto").html(cadena);
+            $("#sel_punto_editar").html(cadena);
+        }else{
+            cadena+="<option value =''>No se encontraron registros</option>"; 
+        }
+    })
+}
 
 function registrar_usuario(){
 
@@ -329,6 +356,7 @@ function registrar_usuario(){
     var clave = $("#txt_con").val();
     var clave2 = $("#txt_con2").val();
     var tipoRol = $("#sel_rol").val();
+    var punto = $("#sel_punto").val();
 
     if( nombre == '' ||
         apellido == '' ||
@@ -362,7 +390,8 @@ function registrar_usuario(){
         email:email,
         usuario:usuario,
         clave:clave,
-        tipoRol:tipoRol
+        tipoRol:tipoRol,
+        punto:punto
         }
     }).done(function(resp){
         console.log(resp);

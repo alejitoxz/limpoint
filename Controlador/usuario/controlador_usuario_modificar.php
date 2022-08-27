@@ -14,6 +14,7 @@
     $usuario = htmlspecialchars($_POST['usuario'],ENT_QUOTES,'UTF-8');
     $clave = $pass;
     $tipoRol = htmlspecialchars($_POST['tipoRol'],ENT_QUOTES,'UTF-8');
+    $punto = htmlspecialchars($_POST['punto'],ENT_QUOTES,'UTF-8');
     $idPersona = htmlspecialchars($_POST['idPersona'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->modificar_datos_usuario($id,$nombre,$apellido,$telefono,$email,$usuario,$clave,$tipoRol,$idPersona);
+    $consulta = $MU->modificar_datos_usuario($id,$nombre,$apellido,$telefono,$email,$usuario,$clave,$tipoRol,$idPersona,$punto);
     echo $consulta;

@@ -115,7 +115,14 @@
               </select><br><br>
             </div>
           </div>
-
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Punto de lavado</label>
+              <select class="js-example-basic-single"  name="state" id="sel_punto" style="width:100%; heigth: 40px;">
+                
+              </select><br><br>
+            </div>
+          </div>
         </div>
         </div>
         <div class="modal-footer">
@@ -196,6 +203,14 @@
               </select><br><br>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Punto de lavado</label>
+              <select class="js-example-basic-single"  name="state" id="sel_punto_editar" style="width:100%; heigth: 40px;">
+                
+              </select><br><br>
+            </div>
+          </div>
         </div>
         </div>
         <div class="modal-footer">
@@ -221,7 +236,7 @@
     listar_usuario();
     $('.js-example-basic-single').select2();
     listar_rol();
-    listar_ent();
+    listar_punto();
     $("#modal_registro").on('shown.bs.modal',function(){
         $("#txt_usu").focus();
     });
